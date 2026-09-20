@@ -1,0 +1,53 @@
+[
+  {
+    "id": "booking_hist_001",
+    "type": "fcl",
+    "shipperId": "shipper_002",
+    "containerId": "MSKU 4432198",
+    "shipmentIds": ["shipment_hist_001"],
+    "totalPriceVnd": 46000000,
+    "status": "completed",
+    "bookedAt": "2026-08-28T10:00:00+07:00",
+    "confirmedAt": "2026-08-28T11:30:00+07:00",
+    "completedAt": "2026-09-01T14:00:00+07:00",
+    "ratingId": "rating_001"
+  },
+  {
+    "id": "booking_hist_002",
+    "type": "consolidation",
+    "shipperId": "shipper_001",
+    "containerId": "TCLU 8877665",
+    "shipmentIds": ["shipment_hist_002a", "shipment_hist_002b"],
+    "totalPriceVnd": 8500000,
+    "status": "completed",
+    "bookedAt": "2026-08-22T09:15:00+07:00",
+    "confirmedAt": "2026-08-22T14:20:00+07:00",
+    "completedAt": "2026-08-25T16:00:00+07:00",
+    "ratingId": "rating_002"
+  },
+  {
+    "id": "booking_hist_003",
+    "type": "fcl",
+    "shipperId": "shipper_002",
+    "containerId": "TRIU 1122334",
+    "shipmentIds": ["shipment_100"],
+    "totalPriceVnd": 46000000,
+    "status": "completed",
+    "bookedAt": "2026-09-16T09:00:00+07:00",
+    "confirmedAt": "2026-09-16T10:30:00+07:00",
+    "completedAt": "2026-09-20T10:00:00+07:00"
+  },
+  {
+    "id": "booking_hist_006",
+    "type": "consolidation",
+    "shipperId": "shipper_001",
+    "containerId": "MSKU 1234567",
+    "shipmentIds": ["shipment_hist_006"],
+    "totalPriceVnd": 6200000,
+    "status": "completed",
+    "bookedAt": "2026-08-02T15:00:00+07:00",
+    "confirmedAt": "2026-08-02T16:45:00+07:00",
+    "completedAt": "2026-08-05T13:30:00+07:00",
+    "ratingId": "rating_006"
+  }
+]

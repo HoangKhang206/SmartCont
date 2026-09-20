@@ -1,0 +1,66 @@
+[
+  {
+    "id": "shipper_001",
+    "role": "shipper",
+    "name": "Trần Văn Nam",
+    "phone": "0912 345 678",
+    "location": "Krông Pắc, Đắk Lắk",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Tran+Van+Nam"
+  },
+  {
+    "id": "shipper_002",
+    "role": "shipper",
+    "name": "Nguyễn Thị Lan",
+    "phone": "0987 654 321",
+    "location": "Cai Lậy, Tiền Giang",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Nguyen+Thi+Lan"
+  },
+  {
+    "id": "shipper_003",
+    "role": "shipper",
+    "name": "Lê Minh Bình",
+    "phone": "0901 234 567",
+    "location": "Cư M'gar, Đắk Lắk",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Le+Minh+Binh"
+  },
+  {
+    "id": "shipper_004",
+    "role": "shipper",
+    "name": "Phạm Thị Hoa",
+    "phone": "0934 567 890",
+    "location": "Chợ Lách, Bến Tre",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Pham+Thi+Hoa"
+  },
+  {
+    "id": "carrier_001",
+    "role": "carrier",
+    "name": "Vận tải Tuấn Phát",
+    "phone": "028 3821 4455",
+    "location": "TP. Hồ Chí Minh",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Tuan+Phat"
+  },
+  {
+    "id": "carrier_002",
+    "role": "carrier",
+    "name": "Cold Chain Logistics VN",
+    "phone": "024 3776 1122",
+    "location": "Hà Nội",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Cold+Chain+VN"
+  },
+  {
+    "id": "carrier_003",
+    "role": "carrier",
+    "name": "Reefer Express",
+    "phone": "0270 3877 999",
+    "location": "Tiền Giang",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Reefer+Express"
+  },
+  {
+    "id": "carrier_004",
+    "role": "carrier",
+    "name": "Anh Tuấn Transport",
+    "phone": "0913 888 777",
+    "location": "TP. Hồ Chí Minh",
+    "avatarUrl": "https://api.dicebear.com/7.x/initials/svg?seed=Anh+Tuan"
+  }
+]

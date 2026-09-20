@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base — cool, professional, cold-chain feel */
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Primary — deep slate for professional tech feel */
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Accent — electric cyan, cold chain signature */
+    --accent: 189 94% 43%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 351 89% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 189 94% 43%;
+
+    --radius: 0.5rem;
+
+    /* SmartCont custom — cold chain semantic colors */
+    --cold: 199 89% 48%;         /* ice blue for reefer/cold status */
+    --cold-soft: 199 89% 92%;    /* bg for cold zones */
+    --warm: 25 95% 53%;          /* amber for warmth warning */
+    --warning: 38 92% 50%;       /* amber for delay/attention */
+    --success: 160 84% 39%;      /* emerald for on-time/delivered */
+    --danger: 351 89% 60%;       /* rose for critical incidents */
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 189 94% 43%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 351 89% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 189 94% 43%;
+
+    --cold: 199 89% 55%;
+    --cold-soft: 199 89% 15%;
+    --warm: 25 95% 60%;
+    --warning: 38 92% 55%;
+    --success: 160 84% 45%;
+    --danger: 351 89% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Numeric emphasis for logistics data */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  /* Cold indicator dot with pulse */
+  .status-dot-live {
+    @apply relative inline-flex h-2 w-2;
+  }
+  .status-dot-live::before {
+    content: "";
+    @apply absolute inline-flex h-full w-full rounded-full bg-cold opacity-75 animate-ping;
+  }
+  .status-dot-live::after {
+    content: "";
+    @apply relative inline-flex rounded-full h-2 w-2 bg-cold;
+  }
+}

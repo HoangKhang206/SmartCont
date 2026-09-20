@@ -1,0 +1,143 @@
+[
+  {
+    "id": "rating_001",
+    "bookingId": "booking_hist_001",
+    "containerId": "MSKU 4432198",
+    "shipperId": "shipper_002",
+    "shipperName": "Nguyễn Thị Lan",
+    "carrierId": "carrier_001",
+    "carrierName": "Vận tải Tuấn Phát",
+    "overallScore": 5,
+    "criteria": {
+      "punctuality": 5,
+      "coldChain": 5,
+      "driverAttitude": 5,
+      "cargoCondition": 4
+    },
+    "reviewText": "Cont đến đúng giờ, tài xế nhiệt tình hỗ trợ khi bốc hàng. Nhiệt độ giữ ổn định 15°C xuyên suốt. Hàng sang đến Bằng Tường vẫn tươi ngon, chỉ có 2 quả bị dập nhẹ do va chạm nhưng không đáng kể.",
+    "createdAt": "2026-09-01T14:30:00+07:00",
+    "editableUntil": "2026-09-08T14:30:00+07:00",
+    "carrierResponse": {
+      "text": "Cảm ơn chị Lan đã tin tưởng. Về vấn đề va chạm, chúng em đã trao đổi với tài xế để chuẩn bị thêm pallet đệm chống sốc.",
+      "respondedAt": "2026-09-02T09:15:00+07:00"
+    }
+  },
+  {
+    "id": "rating_002",
+    "bookingId": "booking_hist_002",
+    "containerId": "TCLU 8877665",
+    "shipperId": "shipper_001",
+    "shipperName": "Trần Văn Nam",
+    "carrierId": "carrier_001",
+    "carrierName": "Vận tải Tuấn Phát",
+    "overallScore": 4,
+    "criteria": {
+      "punctuality": 4,
+      "coldChain": 5,
+      "driverAttitude": 4,
+      "cargoCondition": 4
+    },
+    "reviewText": "Tài xế đến trễ khoảng 1 tiếng do tắc đường vào vựa nhưng có báo trước. Sau đó mọi thứ đều ổn, hàng đến nơi tươi.",
+    "createdAt": "2026-08-25T16:20:00+07:00",
+    "editableUntil": "2026-09-01T16:20:00+07:00"
+  },
+  {
+    "id": "rating_003",
+    "bookingId": "booking_hist_003",
+    "containerId": "MEDU 2211334",
+    "shipperId": "shipper_003",
+    "shipperName": "Lê Minh Bình",
+    "carrierId": "carrier_002",
+    "carrierName": "Cold Chain Logistics VN",
+    "overallScore": 5,
+    "criteria": {
+      "punctuality": 5,
+      "coldChain": 5,
+      "driverAttitude": 5,
+      "cargoCondition": 5
+    },
+    "reviewText": "Đơn vị chuyên nghiệp nhất em từng làm việc. Cont có GPS tracker riêng, gửi báo cáo nhiệt độ mỗi giờ. Hàng sang tới nơi không hư hỏng gì. Sẽ book tiếp lần sau.",
+    "createdAt": "2026-08-20T10:00:00+07:00",
+    "editableUntil": "2026-08-27T10:00:00+07:00"
+  },
+  {
+    "id": "rating_004",
+    "bookingId": "booking_hist_004",
+    "containerId": "GESU 9988771",
+    "shipperId": "shipper_004",
+    "shipperName": "Phạm Thị Hoa",
+    "carrierId": "carrier_003",
+    "carrierName": "Reefer Express",
+    "overallScore": 3,
+    "criteria": {
+      "punctuality": 2,
+      "coldChain": 4,
+      "driverAttitude": 3,
+      "cargoCondition": 3
+    },
+    "reviewText": "Cont bị delay 8 tiếng do sự cố xe. Tài xế có thông báo nhưng thái độ hơi khó chịu khi em hỏi. May là nhiệt độ vẫn giữ được. Hàng đến trễ nên bị ép giá ở đầu Trung Quốc, giảm khoảng 15% lợi nhuận.",
+    "createdAt": "2026-08-15T18:45:00+07:00",
+    "editableUntil": "2026-08-22T18:45:00+07:00",
+    "carrierResponse": {
+      "text": "Chị Hoa em xin lỗi vì trải nghiệm không tốt. Xe bị nổ lốp giữa đường và tài xế đã cố gắng xử lý. Em sẽ có chương trình hỗ trợ 10% cho lần book tiếp theo. Rất mong chị thông cảm.",
+      "respondedAt": "2026-08-16T08:30:00+07:00"
+    }
+  },
+  {
+    "id": "rating_005",
+    "bookingId": "booking_hist_005",
+    "containerId": "FCIU 5544332",
+    "shipperId": "shipper_002",
+    "shipperName": "Nguyễn Thị Lan",
+    "carrierId": "carrier_002",
+    "carrierName": "Cold Chain Logistics VN",
+    "overallScore": 5,
+    "criteria": {
+      "punctuality": 5,
+      "coldChain": 5,
+      "driverAttitude": 5,
+      "cargoCondition": 5
+    },
+    "reviewText": "Lần thứ 3 book với đơn vị này rồi, luôn hài lòng. Đáng đồng tiền.",
+    "createdAt": "2026-08-10T09:20:00+07:00",
+    "editableUntil": "2026-08-17T09:20:00+07:00"
+  },
+  {
+    "id": "rating_006",
+    "bookingId": "booking_hist_006",
+    "containerId": "MSKU 1234567",
+    "shipperId": "shipper_001",
+    "shipperName": "Trần Văn Nam",
+    "carrierId": "carrier_004",
+    "carrierName": "Anh Tuấn Transport",
+    "overallScore": 4,
+    "criteria": {
+      "punctuality": 4,
+      "coldChain": 3,
+      "driverAttitude": 5,
+      "cargoCondition": 4
+    },
+    "reviewText": "Tài xế anh Tuấn rất dễ thương, hỗ trợ nhiệt tình. Nhiệt độ có lúc dao động lên 17°C một chút nhưng tổng thể vẫn OK. Giá cả hợp lý cho vựa nhỏ như em.",
+    "createdAt": "2026-08-05T14:10:00+07:00",
+    "editableUntil": "2026-08-12T14:10:00+07:00"
+  },
+  {
+    "id": "rating_007",
+    "bookingId": "booking_hist_007",
+    "containerId": "TCLU 6677889",
+    "shipperId": "shipper_003",
+    "shipperName": "Lê Minh Bình",
+    "carrierId": "carrier_001",
+    "carrierName": "Vận tải Tuấn Phát",
+    "overallScore": 5,
+    "criteria": {
+      "punctuality": 5,
+      "coldChain": 5,
+      "driverAttitude": 4,
+      "cargoCondition": 5
+    },
+    "reviewText": "Ghép cont chung với 2 vựa khác, mọi thứ được sắp xếp gọn gàng. Cont utilization 91% mà hàng em vẫn được xếp ưu tiên dỡ trước vì RSL thấp hơn. Rất chuyên nghiệp!",
+    "createdAt": "2026-07-28T11:30:00+07:00",
+    "editableUntil": "2026-08-04T11:30:00+07:00"
+  }
+]
