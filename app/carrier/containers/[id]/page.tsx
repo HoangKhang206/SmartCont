@@ -18,15 +18,12 @@ import { CONTAINER_SPECS, PHASE_LABELS } from "@/lib/constants"
 import { formatDateTime, formatNumber, formatRelative } from "@/lib/utils"
 import type { User, Container, Booking, Incident, Route } from "@/lib/types"
 
-const RouteMapPreview = dynamic(
-  () => import("@/components/map/RouteMapPreview").then((m) => ({ default: m.RouteMapPreview })),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="h-52 rounded-lg border border-border bg-muted/50 animate-pulse" />
-    ),
-  }
-)
+const RouteMap = dynamic(() => import("@/components/map/RouteMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-52 rounded-lg border border-border bg-muted/50 animate-pulse" />
+  ),
+})
 
 export default function CarrierContainerDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -71,14 +68,14 @@ export default function CarrierContainerDetailPage() {
           <StatusBadge status={container.currentPhase} />
         </div>
 
-        {/* Route preview */}
+        {/* Route map */}
         {route && (
-          <RouteMapPreview
+          <RouteMap
             route={route}
             currentPhase={container.currentPhase}
             currentPosition={container.currentPosition}
             containerId={container.id}
-            size="md"
+            height="260px"
           />
         )}
 
