@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 import Link from "next/link"
-import { ArrowLeft, GitMerge, MapPin, Package, Thermometer, Calendar, User as UserIcon, Phone, Users, Clock } from "lucide-react"
+import { ArrowLeft, GitMerge, MapPin, Package, Thermometer, Calendar, User as UserIcon, Phone, Users, Clock, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
@@ -166,6 +166,30 @@ export default function ShipmentDetailPage() {
           </div>
         </Card>
 
+        {/* Durian compliance codes */}
+        {(shipment.growingAreaCode || shipment.packingFacilityCode) && (
+          <Card className="p-4 border-success/30 bg-success/5">
+            <div className="flex items-center gap-2 mb-2.5">
+              <ShieldCheck className="h-4 w-4 text-success" />
+              <p className="text-sm font-medium text-success">Mã kiểm dịch Cục BVTV</p>
+            </div>
+            <div className="grid grid-cols-2 gap-3 text-sm">
+              {shipment.growingAreaCode && (
+                <div>
+                  <p className="text-xs text-muted-foreground">Mã số vùng trồng</p>
+                  <p className="font-mono font-medium mt-0.5">{shipment.growingAreaCode}</p>
+                </div>
+              )}
+              {shipment.packingFacilityCode && (
+                <div>
+                  <p className="text-xs text-muted-foreground">Mã số cơ sở đóng gói</p>
+                  <p className="font-mono font-medium mt-0.5">{shipment.packingFacilityCode}</p>
+                </div>
+              )}
+            </div>
+          </Card>
+        )}
+
         {/* Booking chờ xác nhận */}
         {booking && booking.status === "pending" && (
           <Card className="p-5 border-warning/40 bg-warning/5">
@@ -184,8 +208,26 @@ export default function ShipmentDetailPage() {
           </Card>
         )}
 
+        {/* Booking chờ thanh toán */}
+        {booking && booking.status === "awaiting_payment" && (
+          <Card className="p-5 border-accent/40 bg-accent/5">
+            <div className="flex items-start gap-3">
+              <Clock className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <p className="font-medium text-sm text-accent">Cần thanh toán để xác nhận chuyến</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Mã booking: <span className="font-mono">{booking.id}</span>
+                </p>
+              </div>
+              <Button size="sm" asChild>
+                <a href={`/payment/${booking.id}`}>Thanh toán ngay</a>
+              </Button>
+            </div>
+          </Card>
+        )}
+
         {/* Booking info (khi đã book) */}
-        {booking && booking.status !== "pending" && shipment.containerId && (
+        {booking && booking.status !== "pending" && booking.status !== "awaiting_payment" && shipment.containerId && (
           <Card className="p-5 space-y-4">
             <p className="font-medium flex items-center gap-2">
               <Truck className="h-4 w-4 text-accent" />

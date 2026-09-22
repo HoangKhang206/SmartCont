@@ -49,15 +49,11 @@ export default function CarrierBookingDetailPage() {
     if (!booking) return
     setActing(true)
     await new Promise((r) => setTimeout(r, 800))
-    const updated = { ...booking, status: "confirmed" as const, confirmedAt: new Date().toISOString() }
+    const updated = { ...booking, status: "awaiting_payment" as const, confirmedAt: new Date().toISOString() }
     saveBooking(updated)
     setBooking(updated)
-    // Update shipments to "matched" now that carrier has confirmed
-    shipments.forEach((s) => {
-      saveShipment({ ...s, status: "matched", containerId: booking.containerId })
-    })
     toast.success("Đã xác nhận booking!", {
-      description: "Exporter sẽ nhận thông báo và lô hàng được cập nhật sang trạng thái đã ghép.",
+      description: "Exporter sẽ nhận thông báo và cần thanh toán để hoàn tất.",
     })
     setActing(false)
   }

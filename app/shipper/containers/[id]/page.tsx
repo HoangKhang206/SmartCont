@@ -85,21 +85,15 @@ function ContainerDetailContent() {
       containerId: container.id,
       shipmentIds,
       totalPriceVnd: container.priceForFullContainer,
-      status: autoConfirm ? "confirmed" : "pending",
+      status: autoConfirm ? "awaiting_payment" : "pending",
       bookedAt: new Date().toISOString(),
-      ...(autoConfirm ? { confirmedAt: new Date().toISOString() } : {}),
     })
 
     if (autoConfirm) {
-      // Cập nhật trạng thái lô hàng → matched
-      shipmentIds.forEach((sid) => {
-        const s = pendingShipments.find((x) => x.id === sid)
-        if (s) saveShipment({ ...s, status: "matched", containerId: container.id })
+      toast.success("Booking đã được tạo!", {
+        description: `Mã booking: ${bookingId} — Vui lòng thanh toán để xác nhận chuyến.`,
       })
-      toast.success("Đã book cont thành công!", {
-        description: `Mã booking: ${bookingId} — ${container.carrierName} sẽ liên hệ trong 15 phút.`,
-      })
-      router.push(`/shipper/tracking/${encodeURIComponent(container.id)}`)
+      router.push(`/payment/${bookingId}`)
     } else {
       toast.info("Đã gửi yêu cầu book!", {
         description: `Mã booking: ${bookingId} — Carrier đang xem xét, thường phản hồi trong 15 phút.`,

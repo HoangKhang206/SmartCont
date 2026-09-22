@@ -46,6 +46,8 @@ export default function NewShipmentPage() {
       status: "pending_match",
       rsl,
       createdAt: new Date().toISOString(),
+      ...(values.growingAreaCode ? { growingAreaCode: values.growingAreaCode } : {}),
+      ...(values.packingFacilityCode ? { packingFacilityCode: values.packingFacilityCode } : {}),
     })
 
     toast.success("Đã tạo lô hàng!", {

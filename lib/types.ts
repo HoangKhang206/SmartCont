@@ -73,6 +73,9 @@ export interface Shipment {
   rsl: number                   // tính động, số ngày tươi còn lại
   containerId?: string          // sau khi ghép
   createdAt: string
+  // Sầu riêng xuất TQ: bắt buộc theo quy định Cục BVTV
+  growingAreaCode?: string      // Mã số vùng trồng do Cục BVTV cấp
+  packingFacilityCode?: string  // Mã số cơ sở đóng gói do Cục BVTV cấp
 }
 
 // ===== CONTAINER (cont/chuyến) =====
@@ -263,9 +266,10 @@ export interface Booking {
   containerId: string
   shipmentIds: string[]         // 1 cho FCL, nhiều cho consolidation
   totalPriceVnd: number
-  status: "pending" | "confirmed" | "in_progress" | "completed" | "cancelled"
+  status: "pending" | "awaiting_payment" | "confirmed" | "in_progress" | "completed" | "cancelled"
   bookedAt: string
   confirmedAt?: string
+  paidAt?: string
   completedAt?: string
   ratingId?: string
 }

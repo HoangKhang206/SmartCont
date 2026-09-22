@@ -55,21 +55,15 @@ export function ConsolidationResults({ suggestions, isLoading, loadingStep, user
       containerId: suggestion.containerId,
       shipmentIds: suggestion.matchedShipments.map((s) => s.id),
       totalPriceVnd: Math.round(suggestion.totalVolumeM3 * suggestion.container.pricePerCubicMeter),
-      status: autoConfirm ? "confirmed" : "pending",
+      status: autoConfirm ? "awaiting_payment" : "pending",
       bookedAt: new Date().toISOString(),
-      ...(autoConfirm ? { confirmedAt: new Date().toISOString() } : {}),
     })
 
     if (autoConfirm) {
-      suggestion.matchedShipments.forEach((s) => {
-        if (s.shipperId === user.id) {
-          saveShipment({ ...s, status: "matched", containerId: suggestion.containerId })
-        }
-      })
       toast.success("Ghép cont thành công!", {
-        description: `Mã booking: ${bookingId}. Cont ${suggestion.containerId} đã xác nhận.`,
+        description: `Mã booking: ${bookingId} — Vui lòng thanh toán để xác nhận chuyến.`,
       })
-      router.push(`/shipper/tracking/${encodeURIComponent(suggestion.containerId)}`)
+      router.push(`/payment/${bookingId}`)
     } else {
       toast.info("Đã gửi yêu cầu ghép cont!", {
         description: `Mã booking: ${bookingId} — Carrier đang xem xét, thường phản hồi trong 15 phút.`,

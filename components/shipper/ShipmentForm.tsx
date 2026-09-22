@@ -7,6 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDes
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import { calculateRSL } from "@/lib/fake-ai"
 import { PRODUCTS } from "@/lib/constants"
 
@@ -17,6 +18,8 @@ const MATURITY_OPTIONS = [
   { value: 4, label: "4 — Chín kỹ" },
   { value: 5, label: "5 — Chín hoàn toàn" },
 ]
+
+const DURIAN_TYPES = ["durian_ri6", "durian_monthong", "durian_other"]
 
 const schema = z.object({
   productType: z.string().min(1, "Chọn loại nông sản"),
@@ -31,6 +34,8 @@ const schema = z.object({
   destinationBorder: z.string().min(1, "Chọn cửa khẩu"),
   destination: z.string().min(1, "Chọn điểm đến"),
   deadlineDate: z.string().min(1, "Chọn deadline"),
+  growingAreaCode: z.string().optional(),
+  packingFacilityCode: z.string().optional(),
 })
 
 export type ShipmentFormValues = z.infer<typeof schema>
@@ -56,8 +61,13 @@ export function ShipmentForm({ onSubmit, loading }: ShipmentFormProps) {
       destinationBorder: "Hữu Nghị",
       destination: "Bằng Tường, Quảng Tây",
       deadlineDate: "",
+      growingAreaCode: "",
+      packingFacilityCode: "",
     },
   })
+
+  const watchedProduct = form.watch("productType")
+  const isDurian = DURIAN_TYPES.includes(watchedProduct)
 
   function handleSubmit(values: ShipmentFormValues) {
     const rsl = calculateRSL(
@@ -197,6 +207,37 @@ export function ShipmentForm({ onSubmit, loading }: ShipmentFormProps) {
             </FormItem>
           )} />
         </div>
+
+        {/* Durian export compliance — Cục BVTV */}
+        {isDurian && (
+          <div className="rounded-md border border-accent/30 bg-accent/5 p-4 space-y-4">
+            <div className="flex items-center gap-2">
+              <p className="text-sm font-medium">Mã kiểm dịch xuất khẩu TQ</p>
+              <Badge variant="outline" className="text-[10px] border-accent/40 text-accent">Bắt buộc theo Cục BVTV</Badge>
+            </div>
+            <p className="text-xs text-muted-foreground -mt-2">
+              Sầu riêng xuất Trung Quốc phải có mã số vùng trồng và cơ sở đóng gói được Cục Bảo vệ Thực vật cấp phép.
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              <FormField control={form.control} name="growingAreaCode" render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Mã số vùng trồng</FormLabel>
+                  <FormControl><Input placeholder="VD: DL-0001-2024" {...field} /></FormControl>
+                  <FormDescription className="text-[11px]">Do Cục BVTV / Chi cục địa phương cấp</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )} />
+              <FormField control={form.control} name="packingFacilityCode" render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Mã số cơ sở đóng gói</FormLabel>
+                  <FormControl><Input placeholder="VD: CS-DL-0042" {...field} /></FormControl>
+                  <FormDescription className="text-[11px]">Cơ sở đóng gói được Cục BVTV kiểm tra, cấp phép</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )} />
+            </div>
+          </div>
+        )}
 
         <div className="flex justify-end pt-2">
           <Button type="submit" disabled={loading} className="min-w-32">

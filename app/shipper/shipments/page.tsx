@@ -21,7 +21,11 @@ export default function ShipmentsPage() {
     const u = getCurrentUser()
     setUser(u)
     if (u) {
-      setShipments(getShipments().filter((s) => s.shipperId === u.id))
+      setShipments(
+        getShipments()
+          .filter((s) => s.shipperId === u.id)
+          .sort((a, b) => a.rsl - b.rsl)
+      )
       const map = new Map<string, string>()
       getBookings()
         .filter((b) => b.status === "pending")
@@ -36,7 +40,12 @@ export default function ShipmentsPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight">Lô hàng của tôi</h1>
-            <p className="text-sm text-muted-foreground mt-1">{shipments.length} lô hàng</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              {shipments.length} lô hàng · sắp xếp theo RSL ưu tiên &nbsp;
+              <span title="RSL ≤ 7 ngày">🔴</span>
+              <span title="RSL 7–14 ngày"> 🟡</span>
+              <span title="RSL > 14 ngày"> 🟢</span>
+            </p>
           </div>
           <Button size="sm" asChild>
             <Link href="/shipper/shipments/new">

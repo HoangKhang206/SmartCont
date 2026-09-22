@@ -298,6 +298,11 @@ export default function LandingPage() {
           <p className="text-xs text-muted-foreground">
             Nền tảng booking & ghép container lạnh cho SME nông sản · Tuyến tiểu ngạch Việt – Trung
           </p>
+          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+            <Link href="/terms" className="hover:text-foreground transition-colors">Điều khoản</Link>
+            <Link href="/privacy" className="hover:text-foreground transition-colors">Bảo mật</Link>
+            <Link href="/dispute" className="hover:text-foreground transition-colors">Tranh chấp</Link>
+          </div>
         </div>
       </footer>
     </div>

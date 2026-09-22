@@ -13,16 +13,31 @@ interface ShipmentCardProps {
   pendingBookingId?: string
 }
 
+function rslPriorityClass(rsl: number): string {
+  if (rsl <= 7)  return "border-l-4 border-l-danger/70"
+  if (rsl <= 14) return "border-l-4 border-l-warning/60"
+  return "border-l-4 border-l-success/50"
+}
+
+function rslPriorityDot(rsl: number): string {
+  if (rsl <= 7)  return "🔴"
+  if (rsl <= 14) return "🟡"
+  return "🟢"
+}
+
 export function ShipmentCard({ shipment, pendingBookingId }: ShipmentCardProps) {
   const product = PRODUCTS[shipment.productType]
   const hasPendingBooking = !!pendingBookingId
 
   return (
     <Link href={`/shipper/shipments/${shipment.id}`}>
-      <Card className="p-4 hover:border-accent/50 transition-colors cursor-pointer">
+      <Card className={`p-4 hover:border-accent/50 transition-colors cursor-pointer ${rslPriorityClass(shipment.rsl)}`}>
         <div className="flex items-start justify-between gap-3 mb-3">
           <div>
-            <p className="font-medium text-sm">{product?.nameVi ?? shipment.productType}</p>
+            <p className="font-medium text-sm">
+              <span className="mr-1.5">{rslPriorityDot(shipment.rsl)}</span>
+              {product?.nameVi ?? shipment.productType}
+            </p>
             <p className="text-xs text-muted-foreground font-mono mt-0.5">{shipment.id}</p>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">

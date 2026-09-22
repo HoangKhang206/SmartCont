@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import type { ShipmentStatus, ContainerPhase, IncidentSeverity } from "@/lib/types"
 
-type AnyStatus = ShipmentStatus | ContainerPhase | IncidentSeverity | "pending" | "confirmed" | "in_progress" | "completed" | "cancelled"
+type AnyStatus = ShipmentStatus | ContainerPhase | IncidentSeverity | "pending" | "awaiting_payment" | "confirmed" | "in_progress" | "completed" | "cancelled"
 
 interface StatusBadgeProps {
   status: AnyStatus
@@ -30,8 +30,9 @@ const statusConfig: Record<string, { label: string; className: string }> = {
   at_destination:        { label: "Tại điểm đến",      className: "bg-success/15 text-success border-success/30" },
 
   // Booking statuses
-  pending:     { label: "Chờ xác nhận", className: "bg-warning/15 text-warning border-warning/30" },
-  confirmed:   { label: "Đã xác nhận", className: "bg-cold-soft text-cold border-cold/30" },
+  pending:           { label: "Chờ xác nhận",  className: "bg-warning/15 text-warning border-warning/30" },
+  awaiting_payment:  { label: "Chờ thanh toán", className: "bg-accent/10 text-accent border-accent/30" },
+  confirmed:         { label: "Đã xác nhận",    className: "bg-cold-soft text-cold border-cold/30" },
   in_progress: { label: "Đang xử lý",  className: "bg-accent/10 text-accent border-accent/30" },
   completed:   { label: "Hoàn thành",  className: "bg-success/15 text-success border-success/30" },
 

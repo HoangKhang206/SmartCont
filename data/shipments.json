@@ -17,6 +17,8 @@
     "deadlineDate": "2026-09-25",
     "status": "pending_match",
     "rsl": 15.9,
+    "growingAreaCode": "DL-SR-0047-2024",
+    "packingFacilityCode": "CS-DL-0112",
     "createdAt": "2026-09-17T08:15:00+07:00"
   },
   {
@@ -37,6 +39,8 @@
     "deadlineDate": "2026-09-26",
     "status": "pending_match",
     "rsl": 17.6,
+    "growingAreaCode": "DL-SR-0031-2024",
+    "packingFacilityCode": "CS-DL-0089",
     "createdAt": "2026-09-17T14:22:00+07:00"
   },
   {
@@ -57,6 +61,8 @@
     "deadlineDate": "2026-09-27",
     "status": "pending_match",
     "rsl": 17.9,
+    "growingAreaCode": "TG-SR-0018-2024",
+    "packingFacilityCode": "CS-TG-0055",
     "createdAt": "2026-09-16T10:30:00+07:00"
   },
   {
@@ -98,6 +104,8 @@
     "status": "matched",
     "rsl": 9.5,
     "containerId": "GESU 3345678",
+    "growingAreaCode": "DL-SR-0047-2024",
+    "packingFacilityCode": "CS-DL-0112",
     "createdAt": "2026-09-15T16:45:00+07:00"
   },
   {
@@ -139,6 +147,8 @@
     "status": "in_transit",
     "rsl": 15.2,
     "containerId": "TRIU 1122334",
+    "growingAreaCode": "TG-SR-0018-2024",
+    "packingFacilityCode": "CS-TG-0055",
     "createdAt": "2026-09-15T08:00:00+07:00"
   }
 ]
