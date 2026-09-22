@@ -37,18 +37,24 @@ export function DashboardShell({ children, requiredRole }: DashboardShellProps) 
   if (!checked || !user) {
     return (
       <div className="flex h-screen items-center justify-center bg-background">
-        <div className="h-6 w-6 rounded-full border-2 border-accent border-t-transparent animate-spin" />
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-7 w-7 rounded-full border-2 border-accent border-t-transparent animate-spin" />
+          <p className="text-xs text-muted-foreground">Đang tải SmartDurian...</p>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
-      <TopBar user={user} />
-      <div className="flex flex-1 overflow-hidden">
-        <Sidebar role={user.role} className="hidden md:flex sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto" />
-        <main className="flex-1 overflow-y-auto">
-          <div className="max-w-7xl mx-auto p-6 md:p-8">
+    <div className="flex h-screen overflow-hidden bg-background">
+      {/* Left sidebar — full height, sticky */}
+      <Sidebar role={user.role} user={user} />
+
+      {/* Right column: topbar + scrollable content */}
+      <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+        <TopBar user={user} />
+        <main className="flex-1 overflow-y-auto bg-background">
+          <div className="max-w-[1600px] p-6">
             {children}
           </div>
         </main>

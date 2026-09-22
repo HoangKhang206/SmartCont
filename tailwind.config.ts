@@ -87,12 +87,22 @@ const config: Config = {
           from: { transform: "translateX(100%)", opacity: "0" },
           to: { transform: "translateX(0)", opacity: "1" },
         },
+        "wiggle": {
+          "0%, 100%": { transform: "rotate(-12deg)" },
+          "50%": { transform: "rotate(12deg)" },
+        },
+        "count-up": {
+          from: { opacity: "0", transform: "translateY(4px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-cold": "pulse-cold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "slide-in-right": "slide-in-right 0.3s ease-out",
+        "wiggle": "wiggle 0.5s ease-in-out",
+        "count-up": "count-up 0.3s ease-out",
       },
     },
   },
