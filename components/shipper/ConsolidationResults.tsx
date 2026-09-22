@@ -6,7 +6,7 @@ import { ConsolidationCard } from "@/components/shipper/ConsolidationCard"
 import { LoadingSteps, AI_CONSOLIDATION_STEPS } from "@/components/shared/LoadingSteps"
 import { EmptyState } from "@/components/shared/EmptyState"
 import { GitMerge } from "lucide-react"
-import { saveBooking, saveShipment, getCarrierAutoConfirm } from "@/lib/data-store"
+import { saveBooking, saveShipment, getCarrierAutoConfirm, addNotification } from "@/lib/data-store"
 import { generateId } from "@/lib/utils"
 import type { ConsolidationSuggestion, User } from "@/lib/types"
 import { useRouter } from "next/navigation"
@@ -59,12 +59,33 @@ export function ConsolidationResults({ suggestions, isLoading, loadingStep, user
       bookedAt: new Date().toISOString(),
     })
 
+    const now = new Date().toISOString()
     if (autoConfirm) {
+      addNotification({
+        id: generateId("notif"),
+        userId: user.id,
+        type: "consolidation_match",
+        title: "🔗 Ghép cont thành công",
+        message: `Lô hàng của bạn đã được ghép vào cont ${suggestion.containerId} (${suggestion.container.carrierName}). Booking ${bookingId} — Vui lòng thanh toán để xác nhận.`,
+        containerId: suggestion.containerId,
+        read: false,
+        createdAt: now,
+      })
       toast.success("Ghép cont thành công!", {
         description: `Mã booking: ${bookingId} — Vui lòng thanh toán để xác nhận chuyến.`,
       })
       router.push(`/payment/${bookingId}`)
     } else {
+      addNotification({
+        id: generateId("notif"),
+        userId: user.id,
+        type: "consolidation_match",
+        title: "⏳ Đã gửi yêu cầu ghép cont",
+        message: `Yêu cầu ghép lô hàng vào ${suggestion.containerId} (${suggestion.container.carrierName}) đang chờ xác nhận. Booking ${bookingId}.`,
+        containerId: suggestion.containerId,
+        read: false,
+        createdAt: now,
+      })
       toast.info("Đã gửi yêu cầu ghép cont!", {
         description: `Mã booking: ${bookingId} — Carrier đang xem xét, thường phản hồi trong 15 phút.`,
       })

@@ -16,8 +16,8 @@ import { DashboardShell } from "@/components/shared/DashboardShell"
 import { StatusBadge } from "@/components/shared/StatusBadge"
 import { PriceDisplay } from "@/components/shared/PriceDisplay"
 import { ErrorState } from "@/components/shared/ErrorState"
-import { getBookings, saveBooking, saveShipment, getContainerById, getShipments, getUserById } from "@/lib/data-store"
-import { formatDateTime, formatRelative, formatNumber } from "@/lib/utils"
+import { getBookings, saveBooking, saveShipment, getContainerById, getShipments, getUserById, addNotification } from "@/lib/data-store"
+import { formatDateTime, formatRelative, formatNumber, generateId } from "@/lib/utils"
 import { PRODUCTS } from "@/lib/constants"
 import type { Booking, Container, Shipment, User } from "@/lib/types"
 
@@ -49,9 +49,22 @@ export default function CarrierBookingDetailPage() {
     if (!booking) return
     setActing(true)
     await new Promise((r) => setTimeout(r, 800))
-    const updated = { ...booking, status: "awaiting_payment" as const, confirmedAt: new Date().toISOString() }
+    const now = new Date().toISOString()
+    const updated = { ...booking, status: "awaiting_payment" as const, confirmedAt: now }
     saveBooking(updated)
     setBooking(updated)
+
+    const cont = container
+    addNotification({
+      id: generateId("notif"),
+      userId: booking.shipperId,
+      type: "booking_confirmed",
+      title: "✅ Carrier đã xác nhận booking",
+      message: `${cont?.carrierName ?? "Carrier"} đã chấp nhận booking ${booking.id} — Cont ${booking.containerId}. Vui lòng thanh toán để xác nhận chuyến hàng.`,
+      containerId: booking.containerId,
+      read: false,
+      createdAt: now,
+    })
     toast.success("Đã xác nhận booking!", {
       description: "Exporter sẽ nhận thông báo và cần thanh toán để hoàn tất.",
     })

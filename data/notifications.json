@@ -1,0 +1,101 @@
+[
+  {
+    "id": "notif_001",
+    "userId": "shipper_001",
+    "type": "phase_update",
+    "title": "Cont đã đến vựa",
+    "message": "TRIU 1122334 — Tài xế Nguyễn Văn Hùng đã đến điểm gom hàng Cai Lậy. Bắt đầu xếp dỡ lúc 18:15.",
+    "containerId": "TRIU 1122334",
+    "read": true,
+    "createdAt": "2026-09-20T18:15:00+07:00"
+  },
+  {
+    "id": "notif_002",
+    "userId": "shipper_001",
+    "type": "phase_update",
+    "title": "Cont đang vận chuyển",
+    "message": "TRIU 1122334 chính thức xuất phát. Nhiệt độ cont: 15.1°C — đúng set-point. ETA hiện tại: 09:00 ngày 22/09.",
+    "containerId": "TRIU 1122334",
+    "read": true,
+    "createdAt": "2026-09-20T20:05:00+07:00"
+  },
+  {
+    "id": "notif_003",
+    "userId": "shipper_001",
+    "type": "eta_change",
+    "title": "ETA cập nhật — sớm hơn dự kiến",
+    "message": "Tuyến QL1A thông thoáng, không có ùn tắc. ETA mới: 08:22 ngày 22/09 (sớm hơn 38 phút). Confidence 93%.",
+    "containerId": "TRIU 1122334",
+    "read": false,
+    "createdAt": "2026-09-21T06:30:00+07:00"
+  },
+  {
+    "id": "notif_004",
+    "userId": "shipper_001",
+    "type": "phase_update",
+    "title": "Nhiệt độ cold chain ổn định",
+    "message": "Báo cáo tự động 06:00: Nhiệt độ trung bình 12 giờ qua là 15.2°C (±0.3°C). RSL sầu riêng vẫn trong ngưỡng an toàn.",
+    "containerId": "TRIU 1122334",
+    "read": false,
+    "createdAt": "2026-09-21T06:00:00+07:00"
+  },
+  {
+    "id": "notif_005",
+    "userId": "shipper_002",
+    "type": "booking_confirmed",
+    "title": "Booking đã được xác nhận",
+    "message": "Cold Chain Logistics VN đã xác nhận booking của bạn trên cont TRIU 1122334. Lô sầu riêng 12 tấn đã được ghép thành công.",
+    "containerId": "TRIU 1122334",
+    "read": true,
+    "createdAt": "2026-09-15T09:30:00+07:00"
+  },
+  {
+    "id": "notif_006",
+    "userId": "shipper_002",
+    "type": "eta_change",
+    "title": "Cửa khẩu Hữu Nghị có ùn tắc nhẹ",
+    "message": "Thời gian thông quan ước tính tăng thêm 2h do lượng xe đông dịp cuối tháng. ETA điều chỉnh: 11:15 ngày 22/09. Confidence 87%.",
+    "containerId": "TRIU 1122334",
+    "read": false,
+    "createdAt": "2026-09-21T10:45:00+07:00"
+  },
+  {
+    "id": "notif_007",
+    "userId": "carrier_001",
+    "type": "consolidation_match",
+    "title": "3 exporter đang quan tâm chuyến của bạn",
+    "message": "MSKU 7823451 (Đắk Lắk → Hữu Nghị): 3 lô sầu riêng đang xem xét ghép cont trong 15 phút qua. Tổng RSL tương thích.",
+    "containerId": "MSKU 7823451",
+    "read": false,
+    "createdAt": "2026-09-22T08:10:00+07:00"
+  },
+  {
+    "id": "notif_008",
+    "userId": "carrier_001",
+    "type": "rating_received",
+    "title": "Đánh giá mới từ Nguyễn Thị Lan",
+    "message": "Cold chain: 5★ · Đúng giờ: 4★ · Tài xế: 5★. \"Nhiệt độ giữ rất tốt, sầu riêng đến nơi còn tươi nguyên. Sẽ book lại.\"",
+    "read": false,
+    "createdAt": "2026-09-21T16:20:00+07:00"
+  },
+  {
+    "id": "notif_009",
+    "userId": "carrier_002",
+    "type": "booking_confirmed",
+    "title": "Booking mới — Exporter Nguyễn Thị Lan",
+    "message": "Lô sầu riêng Monthong 12 tấn (RSL 15.2 ngày) đã book cont TRIU 1122334 của bạn. Vui lòng xem xét và xác nhận.",
+    "containerId": "TRIU 1122334",
+    "read": true,
+    "createdAt": "2026-09-15T09:00:00+07:00"
+  },
+  {
+    "id": "notif_010",
+    "userId": "carrier_002",
+    "type": "phase_update",
+    "title": "Nhắc nhở cập nhật phase",
+    "message": "TRIU 1122334 đang trên đường. Hãy cập nhật trạng thái khi đến cửa khẩu để exporter theo dõi chính xác hơn.",
+    "containerId": "TRIU 1122334",
+    "read": false,
+    "createdAt": "2026-09-21T14:00:00+07:00"
+  }
+]

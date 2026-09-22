@@ -19,7 +19,7 @@ import { Badge } from "@/components/ui/badge"
 import { PriceDisplay } from "@/components/shared/PriceDisplay"
 import { StarRating } from "@/components/shared/StarRating"
 import { ErrorState } from "@/components/shared/ErrorState"
-import { getContainerById, getRatings, getRouteById, getCurrentUser, saveBooking, saveShipment, getShipments, getUserById, getCarrierAutoConfirm } from "@/lib/data-store"
+import { getContainerById, getRatings, getRouteById, getCurrentUser, saveBooking, saveShipment, getShipments, getUserById, getCarrierAutoConfirm, addNotification } from "@/lib/data-store"
 import { CONTAINER_SPECS, ROUTE_BASE_HOURS } from "@/lib/constants"
 import { formatDateTime, formatNumber, generateId } from "@/lib/utils"
 import type { Container, Rating, User } from "@/lib/types"
@@ -90,12 +90,33 @@ function ContainerDetailContent() {
       bookedAt: new Date().toISOString(),
     })
 
+    const now = new Date().toISOString()
     if (autoConfirm) {
+      addNotification({
+        id: generateId("notif"),
+        userId: user.id,
+        type: "booking_confirmed",
+        title: "📋 Booking đã được tạo thành công",
+        message: `Mã booking ${bookingId} — Cont ${container.id} (${container.carrierName}). Vui lòng thanh toán để xác nhận chuyến hàng.`,
+        containerId: container.id,
+        read: false,
+        createdAt: now,
+      })
       toast.success("Booking đã được tạo!", {
         description: `Mã booking: ${bookingId} — Vui lòng thanh toán để xác nhận chuyến.`,
       })
       router.push(`/payment/${bookingId}`)
     } else {
+      addNotification({
+        id: generateId("notif"),
+        userId: user.id,
+        type: "booking_confirmed",
+        title: "⏳ Đã gửi yêu cầu book cont",
+        message: `Yêu cầu booking ${bookingId} gửi đến ${container.carrierName}. Carrier thường phản hồi trong 15 phút.`,
+        containerId: container.id,
+        read: false,
+        createdAt: now,
+      })
       toast.info("Đã gửi yêu cầu book!", {
         description: `Mã booking: ${bookingId} — Carrier đang xem xét, thường phản hồi trong 15 phút.`,
       })

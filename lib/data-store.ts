@@ -20,6 +20,7 @@ import routesData from "@/data/routes.json"
 import ratingsData from "@/data/ratings.json"
 import usersData from "@/data/users.json"
 import bookingsData from "@/data/bookings.json"
+import notificationsData from "@/data/notifications.json"
 
 const STORAGE_PREFIX = "smartcont:"
 const STORAGE_KEYS = {
@@ -201,14 +202,16 @@ export function setCarrierAutoConfirm(carrierId: string, value: boolean): void {
 
 // ===== NOTIFICATIONS =====
 export function getNotifications(userId: string): Notification[] {
-  const all = loadFromStorage<Notification[]>(STORAGE_KEYS.notifications, [])
-  return all.filter((n) => n.userId === userId)
+  const stored = loadFromStorage<Notification[]>(STORAGE_KEYS.notifications, [])
+  const base = stored.length > 0 ? stored : (notificationsData as Notification[])
+  return base.filter((n) => n.userId === userId).slice(0, 50)
 }
 
 export function addNotification(notification: Notification): void {
-  const all = loadFromStorage<Notification[]>(STORAGE_KEYS.notifications, [])
-  all.unshift(notification)
-  saveToStorage(STORAGE_KEYS.notifications, all.slice(0, 100))
+  const stored = loadFromStorage<Notification[]>(STORAGE_KEYS.notifications, [])
+  const base = stored.length > 0 ? stored : (notificationsData as Notification[])
+  base.unshift(notification)
+  saveToStorage(STORAGE_KEYS.notifications, base.slice(0, 100))
 }
 
 export function markNotificationRead(id: string): void {
@@ -216,6 +219,16 @@ export function markNotificationRead(id: string): void {
   const n = all.find((x) => x.id === id)
   if (n) n.read = true
   saveToStorage(STORAGE_KEYS.notifications, all)
+}
+
+export function markAllNotificationsRead(userId: string): void {
+  const all = loadFromStorage<Notification[]>(STORAGE_KEYS.notifications, [])
+  all.forEach((n) => { if (n.userId === userId) n.read = true })
+  saveToStorage(STORAGE_KEYS.notifications, all)
+}
+
+export function getUnreadCount(userId: string): number {
+  return getNotifications(userId).filter((n) => !n.read).length
 }
 
 // ===== INCIDENTS =====

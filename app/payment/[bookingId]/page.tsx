@@ -15,9 +15,10 @@ import {
   getContainerById,
   getShipments,
   saveShipment,
+  addNotification,
 } from "@/lib/data-store"
 import { PRICING, CONTAINER_SPECS } from "@/lib/constants"
-import { formatNumber } from "@/lib/utils"
+import { formatNumber, generateId } from "@/lib/utils"
 import type { Booking, Container } from "@/lib/types"
 
 const PLATFORM_COMMISSION_RATE = 0.025
@@ -104,7 +105,6 @@ export default function PaymentPage() {
     saveBooking(updated)
 
     if (!isPayingDeposit) {
-      // Full payment or final payment → match shipments
       getShipments()
         .filter((s) => booking.shipmentIds.includes(s.id))
         .forEach((s) => saveShipment({ ...s, status: "matched", containerId: container.id }))
@@ -114,10 +114,30 @@ export default function PaymentPage() {
     setPaying(false)
 
     if (isPayingDeposit) {
+      addNotification({
+        id: generateId("notif"),
+        userId: booking.shipperId,
+        type: "booking_confirmed",
+        title: `💳 Đặt cọc ${depositPercent}% thành công`,
+        message: `Booking ${booking.id} — Đã đặt cọc ${depositPercent}% trên cont ${container.id} (${container.carrierName}). Phần còn lại ${100 - depositPercent}% thanh toán khi hàng đến đích.`,
+        containerId: container.id,
+        read: false,
+        createdAt: now,
+      })
       toast.success("Đặt cọc thành công!", {
         description: "Booking đã xác nhận. Phần còn lại thanh toán khi hàng đến nơi.",
       })
     } else {
+      addNotification({
+        id: generateId("notif"),
+        userId: booking.shipperId,
+        type: "booking_confirmed",
+        title: "💚 Thanh toán hoàn tất — Booking xác nhận",
+        message: `Booking ${booking.id} đã thanh toán đầy đủ. Lô hàng trên cont ${container.id} đã được xác nhận. Carrier ${container.carrierName} sẽ liên hệ trong 15 phút.`,
+        containerId: container.id,
+        read: false,
+        createdAt: now,
+      })
       toast.success("Thanh toán thành công!", {
         description: "Lô hàng đã được xác nhận. Carrier sẽ liên hệ trong 15 phút.",
       })
