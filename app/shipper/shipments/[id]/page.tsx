@@ -209,7 +209,7 @@ export default function ShipmentDetailPage() {
         )}
 
         {/* Booking chờ thanh toán */}
-        {booking && booking.status === "awaiting_payment" && (
+        {booking && booking.status === "awaiting_payment" && !booking.depositPaidAt && (
           <Card className="p-5 border-accent/40 bg-accent/5">
             <div className="flex items-start gap-3">
               <Clock className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
@@ -221,6 +221,24 @@ export default function ShipmentDetailPage() {
               </div>
               <Button size="sm" asChild>
                 <a href={`/payment/${booking.id}`}>Thanh toán ngay</a>
+              </Button>
+            </div>
+          </Card>
+        )}
+
+        {/* Đã cọc, chưa thanh toán phần còn lại */}
+        {booking && booking.depositPaidAt && !booking.paidAt && (
+          <Card className="p-5 border-warning/40 bg-warning/5">
+            <div className="flex items-start gap-3">
+              <Clock className="h-5 w-5 text-warning flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <p className="font-medium text-sm text-warning">Đã đặt cọc — Thanh toán phần còn lại khi hàng đến</p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Mã booking: <span className="font-mono">{booking.id}</span>
+                </p>
+              </div>
+              <Button size="sm" variant="outline" asChild>
+                <a href={`/payment/${booking.id}`}>Thanh toán nốt</a>
               </Button>
             </div>
           </Card>

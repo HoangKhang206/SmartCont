@@ -106,6 +106,8 @@ export const PHASE_ORDER: ContainerPhase[] = [
   "delivered",
 ]
 
+export type PaymentMode = "full" | "deposit"
+
 export interface Container {
   id: string                    // e.g. "MSKU 1234567"
   carrierId: string
@@ -120,6 +122,8 @@ export interface Container {
   pricePerCubicMeter: number    // VND
   priceForFullContainer: number // VND
   availableForConsolidation: boolean
+  paymentMode: PaymentMode      // full = thanh toán toàn bộ, deposit = đặt cọc 2 giai đoạn
+  depositPercent?: number       // 10-70, chỉ dùng khi paymentMode = "deposit"
   currentPhase: ContainerPhase
   currentPosition?: GPSPosition
   assignedShipmentIds: string[]
@@ -269,7 +273,8 @@ export interface Booking {
   status: "pending" | "awaiting_payment" | "confirmed" | "in_progress" | "completed" | "cancelled"
   bookedAt: string
   confirmedAt?: string
-  paidAt?: string
+  depositPaidAt?: string        // giai đoạn 1 khi paymentMode = "deposit"
+  paidAt?: string               // thanh toán toàn bộ hoặc giai đoạn 2
   completedAt?: string
   ratingId?: string
 }

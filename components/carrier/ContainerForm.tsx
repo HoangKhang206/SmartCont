@@ -19,6 +19,8 @@ const schema = z.object({
   pricePerCubicMeter: z.coerce.number().positive("Nhập giá ghép cont"),
   priceForFullContainer: z.coerce.number().positive("Nhập giá nguyên cont"),
   availableForConsolidation: z.string(),
+  paymentMode: z.enum(["full", "deposit"]),
+  depositPercent: z.coerce.number().min(10).max(70).optional(),
 })
 
 export type ContainerFormValues = z.infer<typeof schema>
@@ -41,8 +43,12 @@ export function ContainerForm({ onSubmit, loading }: ContainerFormProps) {
       pricePerCubicMeter: 680000,
       priceForFullContainer: 46000000,
       availableForConsolidation: "true",
+      paymentMode: "full",
+      depositPercent: 30,
     },
   })
+
+  const watchedPaymentMode = form.watch("paymentMode")
 
   return (
     <Form {...form}>
@@ -134,6 +140,37 @@ export function ContainerForm({ onSubmit, loading }: ContainerFormProps) {
               <FormMessage />
             </FormItem>
           )} />
+
+          <FormField control={form.control} name="paymentMode" render={({ field }) => (
+            <FormItem>
+              <FormLabel>Phương thức thanh toán</FormLabel>
+              <Select onValueChange={field.onChange} value={field.value}>
+                <FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
+                <SelectContent>
+                  <SelectItem value="full">Thanh toán toàn bộ — 100% khi book</SelectItem>
+                  <SelectItem value="deposit">Đặt cọc — cọc trước, còn lại khi hàng đến</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )} />
+
+          {watchedPaymentMode === "deposit" && (
+            <FormField control={form.control} name="depositPercent" render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tỷ lệ cọc (%)</FormLabel>
+                <Select onValueChange={(v) => field.onChange(Number(v))} value={String(field.value)}>
+                  <FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
+                  <SelectContent>
+                    <SelectItem value="30">30% — cọc 30%, còn 70% khi giao hàng</SelectItem>
+                    <SelectItem value="40">40% — cọc 40%, còn 60% khi giao hàng</SelectItem>
+                    <SelectItem value="50">50% — cọc 50%, còn 50% khi giao hàng</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )} />
+          )}
         </div>
 
         <div className="flex justify-end pt-2">

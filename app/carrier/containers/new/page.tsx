@@ -49,6 +49,8 @@ export default function NewContainerPage() {
       pricePerCubicMeter: values.pricePerCubicMeter,
       priceForFullContainer: values.priceForFullContainer,
       availableForConsolidation: values.availableForConsolidation === "true",
+      paymentMode: values.paymentMode as "full" | "deposit",
+      ...(values.paymentMode === "deposit" ? { depositPercent: values.depositPercent ?? 30 } : {}),
       currentPhase: "booked",
       assignedShipmentIds: [],
       utilizationPercent: 0,

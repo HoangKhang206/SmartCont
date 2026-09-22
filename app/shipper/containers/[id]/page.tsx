@@ -15,6 +15,7 @@ import dynamic from "next/dynamic"
 import { toast } from "sonner"
 import { DashboardShell } from "@/components/shared/DashboardShell"
 import { StatusBadge } from "@/components/shared/StatusBadge"
+import { Badge } from "@/components/ui/badge"
 import { PriceDisplay } from "@/components/shared/PriceDisplay"
 import { StarRating } from "@/components/shared/StarRating"
 import { ErrorState } from "@/components/shared/ErrorState"
@@ -180,7 +181,18 @@ function ContainerDetailContent() {
 
         {/* Pricing */}
         <Card className="p-5">
-          <p className="font-medium mb-4">Giá cước</p>
+          <div className="flex items-center justify-between mb-4">
+            <p className="font-medium">Giá cước</p>
+            {container.paymentMode === "deposit" ? (
+              <Badge variant="outline" className="text-xs border-accent/40 text-accent bg-accent/5">
+                Đặt cọc {container.depositPercent}% — còn lại khi đến nơi
+              </Badge>
+            ) : (
+              <Badge variant="outline" className="text-xs border-border text-muted-foreground">
+                Thanh toán toàn bộ
+              </Badge>
+            )}
+          </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="p-3 bg-muted/50 rounded-md">
               <p className="text-xs text-muted-foreground mb-1">Ghép cont / m³</p>
