@@ -11,7 +11,6 @@ import { IncomingBookings } from "@/components/carrier/IncomingBookings"
 import { RatingBreakdown } from "@/components/carrier/RatingBreakdown"
 import { StatusBadge } from "@/components/shared/StatusBadge"
 import { ContainerNetworkMap } from "@/components/dashboard/ContainerNetworkMap"
-import { DisruptionSimulatorPanel } from "@/components/dashboard/DisruptionSimulatorPanel"
 import { getCurrentUser, getContainers, getRatingsByCarrierId, getBookings } from "@/lib/data-store"
 import { formatDateTime, formatNumber } from "@/lib/utils"
 import type { User, Container } from "@/lib/types"
@@ -20,18 +19,17 @@ interface MetricCardProps {
   icon: React.ElementType
   label: string
   value: string
-  sub: string
   trend?: string
   trendUp?: boolean
   iconColor?: string
   iconBg?: string
 }
 
-function MetricCard({ icon: Icon, label, value, sub, trend, trendUp, iconColor = "text-accent", iconBg = "bg-accent/10" }: MetricCardProps) {
+function MetricCard({ icon: Icon, label, value, trend, trendUp, iconColor = "text-accent", iconBg = "bg-accent/10" }: MetricCardProps) {
   return (
-    <Card className="p-5 hover:shadow-sm transition-shadow">
-      <div className="flex items-start justify-between mb-3">
-        <div className={`flex h-10 w-10 items-center justify-center rounded-full ${iconBg}`}>
+    <Card className="p-4 hover:shadow-sm transition-shadow">
+      <div className="flex items-start justify-between mb-2">
+        <div className={`flex h-10 w-10 items-center justify-center rounded-full flex-shrink-0 ${iconBg}`}>
           <Icon className={`h-5 w-5 ${iconColor}`} />
         </div>
         {trend && (
@@ -48,80 +46,60 @@ function MetricCard({ icon: Icon, label, value, sub, trend, trendUp, iconColor =
         )}
       </div>
       <p className="text-2xl font-semibold tabular-nums tracking-tight">{value}</p>
-      <p className="text-xs text-muted-foreground mt-1">{label}</p>
-      <p className="text-[10px] text-muted-foreground/60 mt-0.5">{sub}</p>
+      <p className="text-xs text-muted-foreground mt-1 leading-tight">{label}</p>
     </Card>
   )
 }
 
-// Reputation & Reliability panel
 function ReputationPanel({ userId }: { userId: string }) {
   const ratings = getRatingsByCarrierId(userId)
-  const containers = getContainers().filter((c) => c.carrierId === userId)
 
   const coldChain = ratings.length > 0
     ? (ratings.reduce((s, r) => s + (r.criteria?.coldChain ?? r.overallScore), 0) / ratings.length * 20).toFixed(0)
-    : "—"
+    : "96"
   const onTime = ratings.length > 0
     ? (ratings.reduce((s, r) => s + (r.criteria?.punctuality ?? r.overallScore), 0) / ratings.length * 20).toFixed(0)
-    : "—"
+    : "89"
   const overall = ratings.length > 0
     ? (ratings.reduce((s, r) => s + r.overallScore, 0) / ratings.length).toFixed(1)
-    : "—"
+    : "4.7"
 
-  const fakeMetrics = [
-    { label: "Cold Chain",   value: coldChain !== "—" ? `${coldChain}%` : "96%",  level: "High",   color: "text-success" },
-    { label: "Đúng giờ",    value: onTime !== "—" ? `${onTime}%` : "89%",         level: "Medium", color: "text-warning" },
-    { label: "Overall",      value: overall !== "—" ? `${overall}★` : "4.7★",     level: "High",   color: "text-success" },
+  const metrics = [
+    { label: "Cold Chain",  value: `${coldChain}%`,  color: "text-success",  badge: "High" },
+    { label: "On-time",     value: `${onTime}%`,     color: "text-warning",  badge: "Medium" },
+    { label: "Overall",     value: `${overall}★`,    color: "text-success",  badge: "High" },
   ]
 
-  const tempViolations = containers.filter(
-    (c) => c.currentPhase === "in_transit" || c.currentPhase === "at_warehouse"
-  ).length
-
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2 mb-1">
+    <div>
+      <div className="flex items-center gap-2 mb-3">
         <BarChart2 className="h-4 w-4 text-accent" />
         <p className="font-medium text-sm">Reputation & Reliability</p>
       </div>
-
-      <div className="space-y-2">
-        {fakeMetrics.map(({ label, value, level, color }) => (
-          <div key={label} className="flex items-center justify-between py-1.5 border-b border-border/40 last:border-0">
+      <div className="space-y-1.5">
+        {metrics.map(({ label, value, color, badge }) => (
+          <div key={label} className="flex items-center justify-between py-1 border-b border-border/40 last:border-0">
             <span className="text-xs text-muted-foreground">{label}</span>
             <div className="flex items-center gap-2">
               <span className={`text-sm font-semibold tabular-nums ${color}`}>{value}</span>
               <Badge
                 variant="outline"
                 className={`text-[9px] h-4 px-1.5 ${
-                  level === "High"
+                  badge === "High"
                     ? "border-success/30 text-success bg-success/8"
-                    : level === "Medium"
-                    ? "border-warning/30 text-warning bg-warning/8"
-                    : "border-danger/30 text-danger bg-danger/8"
+                    : "border-warning/30 text-warning bg-warning/8"
                 }`}
               >
-                {level}
+                {badge}
               </Badge>
             </div>
           </div>
         ))}
       </div>
-
-      {tempViolations > 0 && (
-        <div className="p-3 rounded-md bg-warning/8 border border-warning/20 text-xs text-warning leading-relaxed">
-          <p className="font-medium mb-0.5">Cold-chain compliance</p>
-          <p className="text-muted-foreground text-[10px]">
-            {tempViolations} cont đang trong tình trạng cần kiểm tra nhiệt độ định kỳ.
-          </p>
-        </div>
-      )}
-
-      <div className="pt-2">
-        <div className="flex items-center justify-between text-[10px] text-muted-foreground mb-1">
+      <div className="mt-3 pt-2 border-t border-border/40">
+        <div className="flex items-center justify-between text-[10px] text-muted-foreground mb-1.5">
           <span>Buyer Reliability score</span>
-          <span className="font-medium text-foreground">Tổng {ratings.length} đánh giá</span>
+          <span className="font-medium text-foreground">{ratings.length} đánh giá</span>
         </div>
         <div className="h-1.5 rounded-full bg-muted/40 overflow-hidden">
           <div
@@ -173,27 +151,28 @@ export default function CarrierDashboardPage() {
 
   return (
     <DashboardShell requiredRole="carrier">
-      <div className="space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
+      {/* 1-viewport-fit: flex column fills exactly h-full, no scroll */}
+      <div className="h-full overflow-hidden flex flex-col gap-3">
+
+        {/* Row 1 — Header */}
+        <div className="flex-shrink-0 flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-semibold tracking-tight">Xin chào, {user.name} 👋</h1>
-            <p className="text-sm text-muted-foreground mt-0.5">Tổng quan hoạt động vận chuyển của đội xe</p>
+            <h1 className="text-lg font-semibold tracking-tight">Xin chào, {user.name} 👋</h1>
+            <p className="text-xs text-muted-foreground mt-0.5">Tổng quan hoạt động vận chuyển của đội xe</p>
           </div>
-          <Button asChild>
-            <Link href="/carrier/containers/new" className="gap-2">
-              <Plus className="h-4 w-4" />Publish chuyến
+          <Button size="sm" asChild>
+            <Link href="/carrier/containers/new" className="gap-1.5">
+              <Plus className="h-3.5 w-3.5" />Publish chuyến
             </Link>
           </Button>
         </div>
 
-        {/* Metrics */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Row 2 — 4 metric cards */}
+        <div className="flex-shrink-0 grid grid-cols-4 gap-3">
           <MetricCard
             icon={Truck}
             label="Số container"
             value={String(getContainers().filter((c) => c.carrierId === user.id).length)}
-            sub={`${containers.filter((c) => c.currentPhase === "in_transit").length} đang vận chuyển`}
             trend="+1 cont mới"
             trendUp
             iconColor="text-primary"
@@ -203,7 +182,6 @@ export default function CarrierDashboardPage() {
             icon={Gauge}
             label="Utilization TB"
             value={`${avgUtil.toFixed(1)}%`}
-            sub="trung bình toàn đội xe"
             trend="+3.2% vs tuần trước"
             trendUp
             iconColor="text-accent"
@@ -213,7 +191,6 @@ export default function CarrierDashboardPage() {
             icon={Star}
             label="Rating trung bình"
             value={avgRating > 0 ? `${avgRating.toFixed(1)}★` : "4.7★"}
-            sub={`${getRatingsByCarrierId(user.id).length} đánh giá nhận được`}
             trend="+0.2 vs tháng trước"
             trendUp
             iconColor="text-warning"
@@ -223,7 +200,6 @@ export default function CarrierDashboardPage() {
             icon={TrendingUp}
             label="Doanh thu tháng"
             value={monthlyRevenue > 0 ? `${formatNumber(Math.round(monthlyRevenue / 1_000_000))}M ₫` : "47.3M ₫"}
-            sub="từ booking hoàn thành"
             trend="+12% vs tháng trước"
             trendUp
             iconColor="text-success"
@@ -231,11 +207,10 @@ export default function CarrierDashboardPage() {
           />
         </div>
 
-        {/* Map + Bookings */}
-        <div className="grid lg:grid-cols-3 gap-5">
-          {/* Container Network Map */}
-          <Card className="lg:col-span-2 p-4">
-            <div className="flex items-center justify-between mb-3">
+        {/* Row 3 — Fleet Map (2/3) + Incoming Bookings (1/3) */}
+        <div className="flex-1 min-h-0 grid grid-cols-3 gap-3">
+          <Card className="col-span-2 p-3 flex flex-col min-h-0">
+            <div className="flex items-center justify-between mb-2 flex-shrink-0">
               <div className="flex items-center gap-2">
                 <Map className="h-4 w-4 text-accent" />
                 <p className="font-medium text-sm">Fleet Network</p>
@@ -245,41 +220,45 @@ export default function CarrierDashboardPage() {
                 <span className="text-[10px] text-success font-medium">Live</span>
               </div>
             </div>
-            <div className="h-[300px]">
+            <div className="flex-1 min-h-0">
               <ContainerNetworkMap />
             </div>
           </Card>
 
-          {/* Incoming Bookings */}
-          <Card className="p-4">
-            <div className="flex items-center justify-between mb-4">
+          <Card className="p-3 overflow-hidden flex flex-col min-h-0">
+            <div className="flex items-center justify-between mb-2 flex-shrink-0">
               <p className="font-medium text-sm">Booking mới</p>
-              <Button variant="ghost" size="sm" className="h-7 text-xs" asChild>
+              <Button variant="ghost" size="sm" className="h-6 text-xs px-2" asChild>
                 <Link href="/carrier/bookings">Tất cả</Link>
               </Button>
             </div>
-            <IncomingBookings user={user} />
+            <div className="flex-1 min-h-0 overflow-hidden">
+              <IncomingBookings user={user} />
+            </div>
           </Card>
         </div>
 
-        {/* Bottom row: Rating + Fleet + Disruption */}
-        <div className="grid lg:grid-cols-3 gap-5">
+        {/* Row 4 — Bottom 3 cards, fixed height */}
+        <div className="flex-shrink-0 h-56 grid grid-cols-3 gap-3">
+
           {/* Rating Breakdown */}
-          <Card className="p-4">
-            <div className="flex items-center justify-between mb-4">
+          <Card className="p-3 overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between mb-2 flex-shrink-0">
               <p className="font-medium text-sm">Đánh giá</p>
-              <Button variant="ghost" size="sm" className="h-7 text-xs" asChild>
+              <Button variant="ghost" size="sm" className="h-6 text-xs px-2" asChild>
                 <Link href="/carrier/ratings">Chi tiết</Link>
               </Button>
             </div>
-            <RatingBreakdown user={user} />
+            <div className="flex-1 min-h-0 overflow-hidden">
+              <RatingBreakdown user={user} />
+            </div>
           </Card>
 
           {/* Container fleet list */}
-          <Card className="p-4">
-            <div className="flex items-center justify-between mb-4">
+          <Card className="p-3 overflow-hidden flex flex-col">
+            <div className="flex items-center justify-between mb-2 flex-shrink-0">
               <p className="font-medium text-sm">Container của bạn</p>
-              <Button variant="ghost" size="sm" className="h-7 text-xs" asChild>
+              <Button variant="ghost" size="sm" className="h-6 text-xs px-2" asChild>
                 <Link href="/carrier/containers">Xem tất cả</Link>
               </Button>
             </div>
@@ -289,18 +268,18 @@ export default function CarrierDashboardPage() {
                 <Link href="/carrier/containers/new" className="text-accent underline">Publish ngay</Link>
               </p>
             ) : (
-              <div className="divide-y divide-border/40">
-                {containers.map((c) => (
+              <div className="divide-y divide-border/40 overflow-hidden">
+                {containers.slice(0, 3).map((c) => (
                   <Link
                     key={c.id}
                     href={`/carrier/containers/${encodeURIComponent(c.id)}`}
-                    className="py-2.5 flex items-center justify-between gap-2 hover:bg-muted/20 -mx-1 px-1 rounded transition-colors"
+                    className="py-2 flex items-center justify-between gap-2 hover:bg-muted/20 -mx-1 px-1 rounded transition-colors"
                   >
-                    <div>
-                      <p className="font-mono text-sm font-medium">{c.id}</p>
+                    <div className="min-w-0">
+                      <p className="font-mono text-xs font-medium truncate">{c.id}</p>
                       <p className="text-[10px] text-muted-foreground">{formatDateTime(c.departureDate)}</p>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-shrink-0">
                       <span className="text-xs text-muted-foreground tabular-nums">{c.utilizationPercent.toFixed(1)}%</span>
                       <StatusBadge status={c.currentPhase} />
                     </div>
@@ -310,15 +289,11 @@ export default function CarrierDashboardPage() {
             )}
           </Card>
 
-          {/* Reputation + Disruption Sim */}
-          <div className="space-y-4">
-            <Card className="p-4">
-              <ReputationPanel userId={user.id} />
-            </Card>
-            <Card className="p-4">
-              <DisruptionSimulatorPanel />
-            </Card>
-          </div>
+          {/* Reputation & Reliability */}
+          <Card className="p-3 overflow-hidden">
+            <ReputationPanel userId={user.id} />
+          </Card>
+
         </div>
       </div>
     </DashboardShell>

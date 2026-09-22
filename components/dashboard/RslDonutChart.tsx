@@ -8,6 +8,7 @@ import type { User } from "@/lib/types"
 
 interface RslDonutChartProps {
   user: User
+  compact?: boolean
 }
 
 const COLORS = {
@@ -16,7 +17,7 @@ const COLORS = {
   critical: { fill: "hsl(351 89% 60%)",  label: "text-danger",   bg: "bg-danger/10",   border: "border-danger/20" },
 }
 
-export function RslDonutChart({ user }: RslDonutChartProps) {
+export function RslDonutChart({ user, compact = false }: RslDonutChartProps) {
   const all = getShipments().filter((s) => s.shipperId === user.id)
   const safe     = all.filter((s) => s.rsl > 48).length
   const warning  = all.filter((s) => s.rsl >= 24 && s.rsl <= 48).length
@@ -29,13 +30,13 @@ export function RslDonutChart({ user }: RslDonutChartProps) {
     { name: "Critical <24h",   value: critical, color: COLORS.critical.fill, key: "critical" },
   ].filter((d) => d.value > 0)
 
-  const worstLots = [...all].sort((a, b) => a.rsl - b.rsl).slice(0, 3)
+  const worstLots = [...all].sort((a, b) => a.rsl - b.rsl).slice(0, compact ? 2 : 3)
 
   return (
-    <div className="space-y-4">
+    <div className={compact ? "space-y-2" : "space-y-4"}>
       {/* Donut */}
       <div className="relative">
-        <ResponsiveContainer width="100%" height={160}>
+        <ResponsiveContainer width="100%" height={compact ? 110 : 160}>
           <PieChart>
             <Pie
               data={data.length > 0 ? data : [{ name: "Trống", value: 1, color: "hsl(217 33% 17%)", key: "empty" }]}
@@ -65,7 +66,7 @@ export function RslDonutChart({ user }: RslDonutChartProps) {
 
         {/* Center label */}
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-          <p className="text-2xl font-semibold tabular-nums">{total}</p>
+          <p className={cn("font-semibold tabular-nums", compact ? "text-lg" : "text-2xl")}>{total}</p>
           <p className="text-[10px] text-muted-foreground">LOTs</p>
         </div>
       </div>
@@ -76,23 +77,24 @@ export function RslDonutChart({ user }: RslDonutChartProps) {
           { key: "safe",     label: "Safe",     count: safe,     range: ">48h",    icon: CheckCircle2, style: COLORS.safe },
           { key: "warning",  label: "Warning",  count: warning,  range: "24–48h",  icon: AlertCircle,  style: COLORS.warning },
           { key: "critical", label: "Critical", count: critical, range: "<24h",    icon: AlertTriangle, style: COLORS.critical },
-        ].map(({ key, label, count, range, icon: Icon, style }) => (
+        ].map(({ key, label, count, range, style }) => (
           <div
             key={key}
             className={cn(
-              "flex flex-col items-center justify-center gap-0.5 p-2 rounded-md border text-center",
+              "flex flex-col items-center justify-center gap-0.5 rounded-md border text-center",
+              compact ? "p-1" : "p-2",
               style.bg, style.border
             )}
           >
-            <span className={cn("text-lg font-semibold tabular-nums leading-none", style.label)}>{count}</span>
-            <span className={cn("text-[9px] font-medium", style.label)}>{label}</span>
-            <span className="text-[8px] text-muted-foreground">{range}</span>
+            <span className={cn("font-semibold tabular-nums leading-none", compact ? "text-base" : "text-lg", style.label)}>{count}</span>
+            <span className={cn("font-medium", compact ? "text-[8px]" : "text-[9px]", style.label)}>{label}</span>
+            {!compact && <span className="text-[8px] text-muted-foreground">{range}</span>}
           </div>
         ))}
       </div>
 
-      {/* Worst RSL list */}
-      {worstLots.length > 0 && (
+      {/* Worst RSL list — hidden in compact mode */}
+      {!compact && worstLots.length > 0 && (
         <div className="space-y-1.5">
           <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide">Worst RSL</p>
           {worstLots.map((s) => {

@@ -93,27 +93,27 @@ export function DisruptionSimulatorPanel() {
   const scenario = SCENARIOS.find((s) => s.id === selected)!
 
   return (
-    <div className="space-y-4 h-full flex flex-col">
+    <div className="space-y-3 h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 flex-shrink-0">
         <Zap className="h-4 w-4 text-accent" />
         <h3 className="text-sm font-semibold">Disruption Simulator</h3>
         <Badge className="ml-auto text-[9px] h-4 px-1.5 bg-accent/20 text-accent border-accent/30 hover:bg-accent/20">
           AI Beta
         </Badge>
       </div>
-      <p className="text-[11px] text-muted-foreground leading-relaxed">
+      <p className="text-[10px] text-muted-foreground leading-relaxed flex-shrink-0">
         Kiểm tra kịch bản gián đoạn và xem SmartDurian tối ưu lại như thế nào.
       </p>
 
       {/* Scenario list */}
-      <div className="space-y-1.5 flex-1">
+      <div className="space-y-1 flex-1 overflow-hidden">
         {SCENARIOS.map((s) => (
           <button
             key={s.id}
             onClick={() => { setSelected(s.id); handleReset() }}
             className={cn(
-              "w-full text-left px-3 py-2.5 rounded-lg border text-xs transition-all",
+              "w-full text-left px-3 py-2 rounded-lg border text-xs transition-all",
               selected === s.id
                 ? "border-accent/40 bg-accent/8 text-foreground"
                 : "border-border/40 bg-muted/20 text-muted-foreground hover:border-border hover:text-foreground hover:bg-muted/40"

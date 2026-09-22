@@ -39,7 +39,7 @@ export function ContainerNetworkMap() {
   return (
     <div className="flex flex-col gap-3 h-full">
       {/* Map */}
-      <div className="flex-1 min-h-[240px] rounded-lg overflow-hidden border border-border relative isolate">
+      <div className="flex-1 min-h-0 rounded-lg overflow-hidden border border-border relative isolate">
         <LeafletMap />
 
         {/* Legend overlay */}
