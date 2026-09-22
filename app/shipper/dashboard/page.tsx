@@ -61,6 +61,7 @@ export default function ShipperDashboard() {
   const [metrics, setMetrics] = useState({
     totalLots: 0, availableContainers: 0, atRisk: 0, onTimeRate: "96%",
   })
+  const [mapMode, setMapMode] = useState<"live" | "simulation">("live")
 
   useEffect(() => {
     const u = getCurrentUser()
@@ -159,13 +160,24 @@ export default function ShipperDashboard() {
                 <Map className="h-4 w-4 text-accent" />
                 <p className="font-medium text-sm">Container Network</p>
               </div>
-              <div className="flex items-center gap-1.5">
-                <span className="flex h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
-                <span className="text-[10px] text-success font-medium">Live</span>
+              <div className="flex rounded-full border border-border overflow-hidden">
+                {(["live", "simulation"] as const).map((m) => (
+                  <button
+                    key={m}
+                    onClick={() => setMapMode(m)}
+                    className={`px-3 py-0.5 text-[11px] font-medium transition-colors capitalize ${
+                      mapMode === m
+                        ? "bg-green-600 text-white"
+                        : "bg-white text-gray-500 hover:bg-gray-50"
+                    }`}
+                  >
+                    {m === "live" ? "Live" : "Simulation"}
+                  </button>
+                ))}
               </div>
             </div>
             <div className="flex-1 min-h-0">
-              <ContainerNetworkMap />
+              <ContainerNetworkMap mode={mapMode} />
             </div>
           </Card>
 
