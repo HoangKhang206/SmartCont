@@ -22,8 +22,8 @@ const statusConfig: Record<string, { label: string; className: string }> = {
 
   // Container phases
   booked:                { label: "Chờ xuất phát",       className: "bg-muted text-muted-foreground border-0" },
-  en_route_to_warehouse: { label: "Đến vựa",           className: "bg-accent/10 text-accent border-accent/30" },
-  at_warehouse:          { label: "Tại vựa",           className: "bg-cold-soft text-cold border-cold/30" },
+  en_route_to_warehouse: { label: "Đến kho",           className: "bg-accent/10 text-accent border-accent/30" },
+  at_warehouse:          { label: "Tại kho",           className: "bg-cold-soft text-cold border-cold/30" },
   loading:               { label: "Đang xếp hàng",     className: "bg-warning/15 text-warning border-warning/30" },
   customs_clearance:     { label: "Thông quan",        className: "bg-warning/15 text-warning border-warning/30" },
   cleared_border:        { label: "Qua cửa khẩu",      className: "bg-success/15 text-success border-success/30" },

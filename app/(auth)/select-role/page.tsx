@@ -19,7 +19,7 @@ const roles: {
   {
     role: "shipper",
     icon: Warehouse,
-    title: "Chủ vựa",
+    title: "Doanh nghiệp",
     subtitle: "Exporter — Xuất khẩu nông sản",
     description: "Vựa sầu riêng, xoài, thanh long quy mô 3–15 tấn/lô. Tìm cont, ghép cont, theo dõi hàng đến cửa khẩu.",
     points: [
@@ -39,7 +39,7 @@ const roles: {
     description: "Công ty vận tải, forwarder sở hữu xe container lạnh. Publish chuyến, nhận booking, tối đa utilization.",
     points: [
       "Đăng cont/chuyến mới dễ dàng",
-      "Nhận booking từ vựa tự động",
+      "Nhận booking từ doanh nghiệp tự động",
       "Cập nhật phase real-time",
       "Xem đánh giá và phản hồi",
     ],

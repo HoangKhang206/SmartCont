@@ -20,7 +20,7 @@ interface RoleSwitcherProps {
 }
 
 const roleConfig = {
-  shipper: { label: "Exporter", sublabel: "Chủ vựa / Xuất khẩu", icon: Warehouse },
+  shipper: { label: "Exporter", sublabel: "Doanh nghiệp / Xuất khẩu", icon: Warehouse },
   carrier: { label: "Carrier", sublabel: "Vận tải / Cold chain", icon: Truck },
 }
 

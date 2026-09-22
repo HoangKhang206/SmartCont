@@ -93,7 +93,7 @@ const CARRIER_TEMPLATES: NotifTemplate[] = [
   },
   {
     type: "phase_update",
-    title: "📋 Nhắc nhở: Cập nhật phase khi đến vựa",
+    title: "📋 Nhắc nhở: Cập nhật phase khi đến kho",
     message: "Cont dự kiến đến điểm gom hàng trong 2 giờ. Cập nhật phase giúp exporter theo dõi và tăng uy tín carrier.",
   },
   {

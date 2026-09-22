@@ -24,7 +24,7 @@ const registerSchema = z.object({
 type RegisterValues = z.infer<typeof registerSchema>
 
 const roleLabel: Record<UserRole, string> = {
-  shipper: "Chủ vựa",
+  shipper: "Doanh nghiệp",
   carrier: "Bên vận chuyển",
 }
 

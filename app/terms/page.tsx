@@ -32,7 +32,7 @@ export default function TermsPage() {
             <h2 className="text-base font-semibold text-foreground">1. Giới thiệu và phạm vi áp dụng</h2>
             <p>
               SmartDurian là nền tảng kết nối kỹ thuật số trung gian giữa <strong className="text-foreground">Exporter</strong>{" "}
-              (chủ vựa / nhà xuất khẩu nông sản) và <strong className="text-foreground">Carrier</strong>{" "}
+              (doanh nghiệp / nhà xuất khẩu nông sản) và <strong className="text-foreground">Carrier</strong>{" "}
               (doanh nghiệp vận tải container lạnh) phục vụ xuất khẩu nông sản theo đường bộ tiểu ngạch và chính ngạch
               qua các cửa khẩu biên giới Việt–Trung.
             </p>

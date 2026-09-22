@@ -20,7 +20,7 @@ interface RatingFormProps {
 }
 
 const criteria = [
-  { key: "punctuality" as const, label: "Đúng giờ", desc: "Đến vựa và giao hàng đúng lịch" },
+  { key: "punctuality" as const, label: "Đúng giờ", desc: "Đến kho và giao hàng đúng lịch" },
   { key: "coldChain" as const, label: "Giữ nhiệt độ", desc: "Cold chain ổn định suốt hành trình" },
   { key: "driverAttitude" as const, label: "Thái độ tài xế", desc: "Giao tiếp, hỗ trợ khi có sự cố" },
   { key: "cargoCondition" as const, label: "Tình trạng hàng", desc: "Hàng đến nơi còn nguyên vẹn, không hư hỏng" },

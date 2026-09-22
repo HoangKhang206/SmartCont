@@ -7,7 +7,7 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "SmartDurian — Ghép cont lạnh thông minh cho SME nông sản",
   description:
-    "Nền tảng booking và ghép container lạnh cho vựa nông sản xuất khẩu, tối ưu theo RSL và ETA dự báo động.",
+    "Nền tảng booking và ghép container lạnh cho doanh nghiệp nông sản xuất khẩu, tối ưu theo RSL và ETA dự báo động.",
 }
 
 export default function RootLayout({

@@ -166,7 +166,7 @@ export function ShipmentForm({ onSubmit, loading }: ShipmentFormProps) {
 
           <FormField control={form.control} name="originAddress" render={({ field }) => (
             <FormItem>
-              <FormLabel>Địa chỉ vựa</FormLabel>
+              <FormLabel>Địa chỉ kho</FormLabel>
               <FormControl><Input placeholder="VD: Ấp 5, Xã Ea Yông..." {...field} /></FormControl>
               <FormMessage />
             </FormItem>

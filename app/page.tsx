@@ -37,27 +37,27 @@ const features = [
     badge: "Trust Layer",
     title: "Rating 4 tiêu chí",
     description:
-      "Rating đa chiều dành riêng cho logistics B2B: đúng giờ, giữ nhiệt độ, thái độ tài xế, tình trạng hàng khi đến. Vựa xem trước khi book, carrier cạnh tranh bằng chất lượng.",
-    points: ["Punctuality — Cold Chain — Driver — Cargo", "Chỉ vựa đã hoàn thành booking mới đánh giá", "Carrier phản hồi công khai"],
+      "Rating đa chiều dành riêng cho logistics B2B: đúng giờ, giữ nhiệt độ, thái độ tài xế, tình trạng hàng khi đến. Doanh nghiệp xem trước khi book, carrier cạnh tranh bằng chất lượng.",
+    points: ["Punctuality — Cold Chain — Driver — Cargo", "Chỉ doanh nghiệp đã hoàn thành booking mới đánh giá", "Carrier phản hồi công khai"],
   },
 ]
 
 const stats = [
   { value: "247", unit: "cont", label: "đã ghép thành công" },
   { value: "91.3%", unit: "", label: "container utilization TB" },
-  { value: "43", unit: "vựa", label: "SME đang sử dụng" },
+  { value: "43", unit: "doanh nghiệp", label: "SME đang sử dụng" },
   { value: "5.2×", unit: "", label: "ETA chính xác hơn Google Maps" },
 ]
 
 const roles = [
   {
     icon: Warehouse,
-    title: "Chủ vựa (Exporter)",
-    subtitle: "Vựa nông sản 3–15 tấn/lô",
+    title: "Doanh nghiệp (Exporter)",
+    subtitle: "Doanh nghiệp nông sản 3–15 tấn/lô",
     color: "border-accent/30 hover:border-accent",
     points: [
       "Tìm cont phù hợp RSL theo tuyến, ngày",
-      "Ghép cont với vựa khác — giảm chi phí",
+      "Ghép cont với doanh nghiệp khác — giảm chi phí",
       "Tracking real-time + AI ETA",
       "Đánh giá carrier sau mỗi chuyến",
     ],
@@ -106,7 +106,7 @@ export default function LandingPage() {
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground max-w-3xl mx-auto leading-tight mb-6">
           Ghép container lạnh{" "}
           <span className="text-accent">thông minh</span>{" "}
-          cho vựa nông sản xuất khẩu
+          cho doanh nghiệp nông sản xuất khẩu
         </h1>
 
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
@@ -281,7 +281,7 @@ export default function LandingPage() {
           </div>
           <h2 className="text-2xl font-semibold tracking-tight mb-3">Sẵn sàng tối ưu cold chain?</h2>
           <p className="text-muted-foreground text-sm mb-8 max-w-md mx-auto">
-            Tham gia cùng 43 vựa nông sản đang dùng SmartDurian để xuất khẩu hiệu quả hơn.
+            Tham gia cùng 43 doanh nghiệp nông sản đang dùng SmartDurian để xuất khẩu hiệu quả hơn.
           </p>
           <Button size="lg" className="px-10" asChild>
             <Link href="/select-role">

@@ -309,7 +309,7 @@ export default function ShipmentDetailPage() {
                 <div>
                   <p className="text-xs text-muted-foreground mb-2 flex items-center gap-1.5">
                     <Users className="h-3.5 w-3.5" />
-                    Các chủ vựa ghép cùng chuyến ({coShippers.length})
+                    Các doanh nghiệp ghép cùng chuyến ({coShippers.length})
                   </p>
                   <div className="space-y-2">
                     {coShippers.map(({ shipment: s, shipper }) => (

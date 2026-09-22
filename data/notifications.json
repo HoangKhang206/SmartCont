@@ -3,7 +3,7 @@
     "id": "notif_001",
     "userId": "shipper_001",
     "type": "phase_update",
-    "title": "Cont đã đến vựa",
+    "title": "Cont đã đến kho",
     "message": "TRIU 1122334 — Tài xế Nguyễn Văn Hùng đã đến điểm gom hàng Cai Lậy. Bắt đầu xếp dỡ lúc 18:15.",
     "containerId": "TRIU 1122334",
     "read": true,

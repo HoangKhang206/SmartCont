@@ -59,7 +59,7 @@ export function ProfileEditDialog({ user, open, onClose, onUpdated }: ProfileEdi
     onClose()
   }
 
-  const roleLabel = user.role === "shipper" ? "Chủ vựa" : "Bên vận chuyển"
+  const roleLabel = user.role === "shipper" ? "Doanh nghiệp" : "Bên vận chuyển"
 
   return (
     <Dialog open={open} onOpenChange={(v) => { if (!v) onClose() }}>

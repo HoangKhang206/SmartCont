@@ -111,8 +111,8 @@ export const CONTAINER_SPECS: Record<
 // ===== PHASE LABELS (Vietnamese) =====
 export const PHASE_LABELS: Record<ContainerPhase, string> = {
   booked: "Chờ xuất phát",
-  en_route_to_warehouse: "Đang đến vựa",
-  at_warehouse: "Đến vựa",
+  en_route_to_warehouse: "Đang đến kho",
+  at_warehouse: "Đến kho",
   loading: "Đang bốc hàng",
   in_transit: "Đang vận chuyển",
   at_border: "Đến cửa khẩu",

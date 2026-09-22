@@ -37,7 +37,7 @@
       "driverAttitude": 4,
       "cargoCondition": 4
     },
-    "reviewText": "Tài xế đến trễ khoảng 1 tiếng do tắc đường vào vựa nhưng có báo trước. Sau đó mọi thứ đều ổn, hàng đến nơi tươi.",
+    "reviewText": "Tài xế đến trễ khoảng 1 tiếng do tắc đường vào kho nhưng có báo trước. Sau đó mọi thứ đều ổn, hàng đến nơi tươi.",
     "createdAt": "2026-08-25T16:20:00+07:00",
     "editableUntil": "2026-09-01T16:20:00+07:00"
   },
@@ -117,7 +117,7 @@
       "driverAttitude": 5,
       "cargoCondition": 4
     },
-    "reviewText": "Tài xế anh Tuấn rất dễ thương, hỗ trợ nhiệt tình. Nhiệt độ có lúc dao động lên 17°C một chút nhưng tổng thể vẫn OK. Giá cả hợp lý cho vựa nhỏ như em.",
+    "reviewText": "Tài xế anh Tuấn rất dễ thương, hỗ trợ nhiệt tình. Nhiệt độ có lúc dao động lên 17°C một chút nhưng tổng thể vẫn OK. Giá cả hợp lý cho doanh nghiệp nhỏ như em.",
     "createdAt": "2026-08-05T14:10:00+07:00",
     "editableUntil": "2026-08-12T14:10:00+07:00"
   },
@@ -136,7 +136,7 @@
       "driverAttitude": 4,
       "cargoCondition": 5
     },
-    "reviewText": "Ghép cont chung với 2 vựa khác, mọi thứ được sắp xếp gọn gàng. Cont utilization 91% mà hàng em vẫn được xếp ưu tiên dỡ trước vì RSL thấp hơn. Rất chuyên nghiệp!",
+    "reviewText": "Ghép cont chung với 2 doanh nghiệp khác, mọi thứ được sắp xếp gọn gàng. Cont utilization 91% mà hàng em vẫn được xếp ưu tiên dỡ trước vì RSL thấp hơn. Rất chuyên nghiệp!",
     "createdAt": "2026-07-28T11:30:00+07:00",
     "editableUntil": "2026-08-04T11:30:00+07:00"
   }
