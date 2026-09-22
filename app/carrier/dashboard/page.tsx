@@ -154,7 +154,7 @@ export default function CarrierDashboardPage() {
   if (!user) return null
 
   return (
-    <DashboardShell requiredRole="carrier">
+    <DashboardShell requiredRole="carrier" noScroll>
       {/* 1-viewport-fit: flex column fills exactly h-full, no scroll */}
       <div className="h-full overflow-hidden flex flex-col gap-3">
 

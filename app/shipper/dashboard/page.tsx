@@ -82,7 +82,7 @@ export default function ShipperDashboard() {
   }, [])
 
   return (
-    <DashboardShell requiredRole="shipper">
+    <DashboardShell requiredRole="shipper" noScroll>
       {/* 1-viewport-fit: flex column fills exactly h-full, no scroll */}
       <div className="h-full overflow-hidden flex flex-col gap-3">
 
