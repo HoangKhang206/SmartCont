@@ -82,12 +82,12 @@ export function Sidebar({ role, user, className }: SidebarProps) {
       {/* Logo + tagline */}
       <div className="px-5 pt-5 pb-4" style={{ borderBottom: "1px solid hsl(var(--sidebar-border))" }}>
         <Logo
-          size="md"
+          size="lg"
           variant="light"
           href={role === "shipper" ? "/shipper/dashboard" : "/carrier/dashboard"}
         />
         <p
-          className="text-[10px] mt-1.5 tracking-wide leading-none font-medium"
+          className="text-xs mt-2 tracking-wide leading-none font-medium"
           style={{ color: "hsl(var(--sidebar-muted))" }}
         >
           Smarter Logistics · Fresher Tomorrow
