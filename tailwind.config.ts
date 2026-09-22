@@ -60,6 +60,15 @@ const config: Config = {
         warning: "hsl(var(--warning))",
         success: "hsl(var(--success))",
         danger: "hsl(var(--danger))",
+        // Sidebar split-theme tokens
+        sidebar: {
+          DEFAULT:  "hsl(var(--sidebar-bg))",
+          active:   "hsl(var(--sidebar-active))",
+          hover:    "hsl(var(--sidebar-hover))",
+          fg:       "hsl(var(--sidebar-fg))",
+          muted:    "hsl(var(--sidebar-muted))",
+          border:   "hsl(var(--sidebar-border))",
+        },
       },
       fontFamily: {
         sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],

@@ -17,8 +17,8 @@ import {
   ChevronRight,
 } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import type React from "react"
 import { logout, resetDemoData } from "@/lib/data-store"
 import { Logo } from "@/components/shared/Logo"
 import type { UserRole, User } from "@/lib/types"
@@ -68,23 +68,30 @@ export function Sidebar({ role, user, className }: SidebarProps) {
 
   return (
     <aside className={cn(
-      "w-56 flex-shrink-0 border-r border-border bg-card flex flex-col h-screen sticky top-0 z-30",
+      "w-56 flex-shrink-0 flex flex-col h-screen sticky top-0 z-30 border-r",
       className
-    )}>
+    )}
+    style={{
+      background: "hsl(var(--sidebar-bg))",
+      borderColor: "hsl(var(--sidebar-border))",
+    }}>
       {/* Logo + tagline */}
-      <div className="px-5 pt-5 pb-4 border-b border-border/60">
+      <div className="px-5 pt-5 pb-4" style={{ borderBottom: "1px solid hsl(var(--sidebar-border))" }}>
         <Logo
           size="md"
+          variant="light"
           href={role === "shipper" ? "/shipper/dashboard" : "/carrier/dashboard"}
         />
-        <p className="text-[10px] text-muted-foreground/50 mt-2 tracking-wide leading-none font-medium">
+        <p className="text-[10px] mt-2 tracking-wide leading-none font-medium"
+          style={{ color: "hsl(var(--sidebar-muted))" }}>
           Smarter Logistics · Fresher Tomorrow
         </p>
       </div>
 
       {/* Navigation */}
       <nav className="flex-1 px-2.5 py-3 space-y-0.5 overflow-y-auto">
-        <p className="px-3 mb-2 text-[9px] font-semibold uppercase tracking-widest text-muted-foreground/40">
+        <p className="px-3 mb-2 text-[9px] font-semibold uppercase tracking-widest"
+          style={{ color: "hsl(var(--sidebar-muted))" }}>
           {role === "shipper" ? "Exporter Portal" : "Carrier Portal"}
         </p>
         {navItems.map((item) => {
@@ -96,60 +103,84 @@ export function Sidebar({ role, user, className }: SidebarProps) {
               key={item.href}
               href={item.href}
               className={cn(
-                "group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150",
-                isActive
-                  ? "bg-accent/15 text-accent font-medium"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                "group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150"
               )}
+              style={{
+                background: isActive ? "hsl(var(--sidebar-active))" : "transparent",
+                color: isActive ? "hsl(var(--sidebar-fg))" : "hsl(var(--sidebar-muted))",
+                fontWeight: isActive ? 500 : 400,
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.background = "hsl(var(--sidebar-hover))"
+                  e.currentTarget.style.color = "hsl(var(--sidebar-fg))"
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.background = "transparent"
+                  e.currentTarget.style.color = "hsl(var(--sidebar-muted))"
+                }
+              }}
             >
-              <Icon className={cn(
-                "h-[18px] w-[18px] flex-shrink-0 transition-colors",
-                isActive ? "text-accent" : "group-hover:text-foreground"
-              )} />
+              <Icon className="h-[18px] w-[18px] flex-shrink-0" />
               <span className="flex-1 truncate">{item.label}</span>
-              {isActive && <ChevronRight className="h-3 w-3 text-accent/60 flex-shrink-0" />}
+              {isActive && (
+                <ChevronRight className="h-3 w-3 flex-shrink-0 opacity-60" />
+              )}
             </Link>
           )
         })}
       </nav>
 
       {/* User section */}
-      <div className="px-4 py-4 border-t border-border/60 space-y-3">
+      <div className="px-4 py-4 space-y-3"
+        style={{ borderTop: "1px solid hsl(var(--sidebar-border))" }}>
         <div className="flex items-center gap-2.5">
-          <Avatar className="h-8 w-8 ring-1 ring-border flex-shrink-0">
+          <Avatar className="h-8 w-8 flex-shrink-0 ring-1" style={{ "--tw-ring-color": "hsl(var(--sidebar-border))" } as React.CSSProperties}>
             <AvatarImage src={user.avatarUrl} alt={user.name} />
-            <AvatarFallback className="text-xs bg-accent/20 text-accent font-semibold">
+            <AvatarFallback className="text-xs font-semibold"
+              style={{ background: "hsl(var(--sidebar-active))", color: "hsl(var(--sidebar-fg))" }}>
               {getInitials(user.name)}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-foreground truncate leading-tight">{user.name}</p>
-            <p className="text-[10px] text-muted-foreground truncate">{user.location ?? "SmartDurian"}</p>
+            <p className="text-sm font-medium truncate leading-tight"
+              style={{ color: "hsl(var(--sidebar-fg))" }}>
+              {user.name}
+            </p>
+            <p className="text-[10px] truncate" style={{ color: "hsl(var(--sidebar-muted))" }}>
+              {user.location ?? "SmartDurian"}
+            </p>
           </div>
         </div>
 
         <div className="flex items-center justify-between">
-          <Badge
-            variant="outline"
-            className="text-[9px] h-4 px-1.5 font-medium border-accent/30 text-accent bg-accent/5"
+          <span
+            className="text-[9px] font-semibold px-1.5 py-0.5 rounded-sm"
+            style={{
+              background: "hsl(var(--sidebar-active))",
+              color: "hsl(152 80% 70%)",
+            }}
           >
             {role === "shipper" ? "Exporter" : "Carrier"}
-          </Badge>
+          </span>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => { resetDemoData(); window.location.href = "/" }}
-              className="text-[9px] text-muted-foreground/30 hover:text-muted-foreground/60 transition-colors"
+              className="text-[9px] transition-opacity opacity-30 hover:opacity-60"
+              style={{ color: "hsl(var(--sidebar-muted))" }}
             >
               reset
             </button>
-            <span className="text-muted-foreground/20">·</span>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-0.5 text-[9px] text-muted-foreground/40 hover:text-danger transition-colors"
+              className="flex items-center gap-0.5 transition-colors opacity-50 hover:opacity-90"
+              style={{ color: "hsl(var(--sidebar-muted))" }}
               title="Đăng xuất"
             >
-              <LogOut className="h-3 w-3" />
+              <LogOut className="h-3.5 w-3.5" />
             </button>
           </div>
         </div>

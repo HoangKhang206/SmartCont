@@ -6,83 +6,99 @@
 
 @layer base {
   :root {
-    /* Base — cool, professional, cold-chain feel */
-    --background: 210 20% 98%;
-    --foreground: 222 47% 11%;
+    /* Base — clean light, professional */
+    --background: 150 12% 97%;
+    --foreground: 150 30% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 150 30% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 150 30% 10%;
 
-    /* Primary — deep slate for professional tech feel */
-    --primary: 222 47% 11%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary — deep forest green */
+    --primary: 152 52% 18%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
+    --secondary: 150 20% 94%;
+    --secondary-foreground: 152 30% 15%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 150 15% 94%;
+    --muted-foreground: 152 10% 45%;
 
-    /* Accent — electric cyan, cold chain signature */
-    --accent: 189 94% 43%;
+    /* Accent — medium forest green for interactive elements */
+    --accent: 152 55% 33%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 351 89% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 150 15% 88%;
+    --input: 150 15% 88%;
+    --ring: 152 55% 33%;
+
+    --radius: 0.5rem;
+
+    /* ── Sidebar — standalone dark green (split theme) ── */
+    --sidebar-bg: 152 52% 10%;          /* very dark forest green */
+    --sidebar-active: 152 52% 17%;      /* active item bg (slightly lighter) */
+    --sidebar-hover: 152 52% 14%;       /* hover bg */
+    --sidebar-fg: 150 20% 90%;          /* primary text on sidebar */
+    --sidebar-muted: 152 12% 58%;       /* muted / label text on sidebar */
+    --sidebar-border: 152 40% 15%;      /* divider within sidebar */
+
+    /* ── SmartCont custom — cold chain semantic colors ── */
+    --cold: 199 89% 42%;
+    --cold-soft: 199 89% 94%;
+    --warm: 25 95% 53%;
+    --warning: 38 92% 48%;
+    --success: 160 84% 37%;
+    --danger: 351 89% 55%;
+  }
+
+  /* Dark mode kept for future use but not forced */
+  .dark {
+    --background: 152 30% 6%;
+    --foreground: 150 20% 95%;
+
+    --card: 152 30% 9%;
+    --card-foreground: 150 20% 95%;
+
+    --popover: 152 30% 9%;
+    --popover-foreground: 150 20% 95%;
+
+    --primary: 150 20% 95%;
+    --primary-foreground: 152 30% 10%;
+
+    --secondary: 152 25% 15%;
+    --secondary-foreground: 150 20% 95%;
+
+    --muted: 152 25% 15%;
+    --muted-foreground: 152 12% 60%;
+
+    --accent: 152 55% 40%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 351 89% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 189 94% 43%;
+    --border: 152 25% 17%;
+    --input: 152 25% 17%;
+    --ring: 152 55% 40%;
 
-    --radius: 0.5rem;
+    --sidebar-bg: 152 52% 7%;
+    --sidebar-active: 152 52% 14%;
+    --sidebar-hover: 152 52% 11%;
+    --sidebar-fg: 150 20% 90%;
+    --sidebar-muted: 152 12% 55%;
+    --sidebar-border: 152 40% 12%;
 
-    /* SmartCont custom — cold chain semantic colors */
-    --cold: 199 89% 48%;         /* ice blue for reefer/cold status */
-    --cold-soft: 199 89% 92%;    /* bg for cold zones */
-    --warm: 25 95% 53%;          /* amber for warmth warning */
-    --warning: 38 92% 50%;       /* amber for delay/attention */
-    --success: 160 84% 39%;      /* emerald for on-time/delivered */
-    --danger: 351 89% 60%;       /* rose for critical incidents */
-  }
-
-  .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222 47% 9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222 47% 11%;
-
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-
-    --accent: 189 94% 43%;
-    --accent-foreground: 222 47% 11%;
-
-    --destructive: 351 89% 60%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 189 94% 43%;
-
-    --cold: 199 89% 55%;
+    --cold: 199 89% 50%;
     --cold-soft: 199 89% 15%;
-    --warm: 25 95% 60%;
-    --warning: 38 92% 55%;
-    --success: 160 84% 45%;
-    --danger: 351 89% 65%;
+    --warm: 25 95% 58%;
+    --warning: 38 92% 52%;
+    --success: 160 84% 42%;
+    --danger: 351 89% 62%;
   }
 }
 
@@ -95,7 +111,6 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
-  /* Numeric emphasis for logistics data */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
   }
