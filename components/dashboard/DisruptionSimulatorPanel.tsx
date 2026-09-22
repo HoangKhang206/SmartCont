@@ -107,7 +107,7 @@ export function DisruptionSimulatorPanel() {
       </p>
 
       {/* Scenario list */}
-      <div className="space-y-1 flex-1 overflow-hidden">
+      <div className="space-y-1 flex-1 overflow-y-auto">
         {SCENARIOS.map((s) => (
           <button
             key={s.id}
