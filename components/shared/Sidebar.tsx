@@ -87,7 +87,7 @@ export function Sidebar({ role, user, className }: SidebarProps) {
           href={role === "shipper" ? "/shipper/dashboard" : "/carrier/dashboard"}
         />
         <p
-          className="text-xs mt-2 tracking-wide leading-none font-medium"
+          className="text-[10px] mt-2 tracking-wide leading-none font-medium"
           style={{ color: "hsl(var(--sidebar-muted))" }}
         >
           Smarter Logistics · Fresher Tomorrow
