@@ -66,14 +66,14 @@ export function TopBar({ user: initialUser }: TopBarProps) {
   const dateStr = format(now, "EEE, d MMM · HH:mm", { locale: vi })
 
   return (
-    <header className="sticky top-0 z-20 flex h-14 items-center border-b border-border/60 bg-card/80 backdrop-blur-md px-5 gap-4 flex-shrink-0">
+    <header className="sticky top-0 z-20 flex h-14 items-center border-b border-border bg-card px-5 gap-4 flex-shrink-0 shadow-sm">
       {/* Search */}
-      <div className="relative flex-1 max-w-sm">
+      <div className="relative flex-1 max-w-md">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground/50" />
         <input
           type="text"
           placeholder="Tìm LOT, container, FWD, địa điểm..."
-          className="w-full h-8 pl-8 pr-3 text-xs bg-muted/40 border border-border/50 rounded-md text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-1 focus:ring-accent/50 focus:border-accent/50 transition-all"
+          className="w-full h-9 pl-8 pr-3 text-xs bg-muted/50 border border-border rounded-lg text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-1 focus:ring-accent/40 focus:border-accent/40 transition-all"
           readOnly
         />
       </div>

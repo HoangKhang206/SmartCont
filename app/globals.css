@@ -6,46 +6,46 @@
 
 @layer base {
   :root {
-    /* Base — clean light, professional */
-    --background: 150 12% 97%;
-    --foreground: 150 30% 10%;
+    /* Base — warm off-white, professional logistics */
+    --background: 150 10% 96%;
+    --foreground: 152 35% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 150 30% 10%;
+    --card-foreground: 152 35% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 150 30% 10%;
+    --popover-foreground: 152 35% 8%;
 
     /* Primary — deep forest green */
-    --primary: 152 52% 18%;
+    --primary: 152 55% 20%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 150 20% 94%;
-    --secondary-foreground: 152 30% 15%;
+    --secondary: 150 18% 92%;
+    --secondary-foreground: 152 35% 15%;
 
-    --muted: 150 15% 94%;
-    --muted-foreground: 152 10% 45%;
+    --muted: 150 12% 92%;
+    --muted-foreground: 152 8% 48%;
 
-    /* Accent — medium forest green for interactive elements */
-    --accent: 152 55% 33%;
+    /* Accent — vibrant forest green for interactive elements */
+    --accent: 152 58% 32%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 351 89% 55%;
+    --destructive: 351 89% 52%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 150 15% 88%;
-    --input: 150 15% 88%;
-    --ring: 152 55% 33%;
+    --border: 150 14% 86%;
+    --input: 150 14% 86%;
+    --ring: 152 58% 32%;
 
     --radius: 0.5rem;
 
-    /* ── Sidebar — standalone dark green (split theme) ── */
-    --sidebar-bg: 152 52% 10%;          /* very dark forest green */
-    --sidebar-active: 152 52% 17%;      /* active item bg (slightly lighter) */
-    --sidebar-hover: 152 52% 14%;       /* hover bg */
-    --sidebar-fg: 150 20% 90%;          /* primary text on sidebar */
-    --sidebar-muted: 152 12% 58%;       /* muted / label text on sidebar */
-    --sidebar-border: 152 40% 15%;      /* divider within sidebar */
+    /* ── Sidebar — standalone dark forest green (split theme) ── */
+    --sidebar-bg: 152 45% 9%;           /* very dark forest green #0F2218 */
+    --sidebar-active: 152 45% 16%;      /* active item bg */
+    --sidebar-hover: 152 45% 13%;       /* hover bg */
+    --sidebar-fg: 150 22% 92%;          /* near-white for sidebar text */
+    --sidebar-muted: 152 14% 55%;       /* muted / label text on sidebar */
+    --sidebar-border: 152 38% 14%;      /* divider within sidebar */
 
     /* ── SmartCont custom — cold chain semantic colors ── */
     --cold: 199 89% 42%;
@@ -53,10 +53,10 @@
     --warm: 25 95% 53%;
     --warning: 38 92% 48%;
     --success: 160 84% 37%;
-    --danger: 351 89% 55%;
+    --danger: 351 89% 52%;
   }
 
-  /* Dark mode kept for future use but not forced */
+  /* Dark mode — kept for future, not active */
   .dark {
     --background: 152 30% 6%;
     --foreground: 150 20% 95%;
@@ -76,7 +76,7 @@
     --muted: 152 25% 15%;
     --muted-foreground: 152 12% 60%;
 
-    --accent: 152 55% 40%;
+    --accent: 152 58% 40%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 351 89% 60%;
@@ -84,14 +84,14 @@
 
     --border: 152 25% 17%;
     --input: 152 25% 17%;
-    --ring: 152 55% 40%;
+    --ring: 152 58% 40%;
 
-    --sidebar-bg: 152 52% 7%;
-    --sidebar-active: 152 52% 14%;
-    --sidebar-hover: 152 52% 11%;
-    --sidebar-fg: 150 20% 90%;
-    --sidebar-muted: 152 12% 55%;
-    --sidebar-border: 152 40% 12%;
+    --sidebar-bg: 152 45% 6%;
+    --sidebar-active: 152 45% 13%;
+    --sidebar-hover: 152 45% 10%;
+    --sidebar-fg: 150 22% 92%;
+    --sidebar-muted: 152 14% 52%;
+    --sidebar-border: 152 38% 11%;
 
     --cold: 199 89% 50%;
     --cold-soft: 199 89% 15%;

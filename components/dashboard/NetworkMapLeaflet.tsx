@@ -69,8 +69,8 @@ export default function NetworkMapLeaflet() {
       attributionControl={false}
     >
       <TileLayer
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-        attribution='&copy; <a href="https://carto.com">CARTO</a>'
+        url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+        attribution="&copy; Esri"
       />
 
       {/* Route lines */}
@@ -78,10 +78,10 @@ export default function NetworkMapLeaflet() {
         <Polyline
           key={i}
           positions={pts}
-          color="#0ea5e9"
-          weight={1.5}
-          opacity={0.35}
-          dashArray="6 4"
+          color="#34d399"
+          weight={2}
+          opacity={0.7}
+          dashArray="8 5"
         />
       ))}
 
@@ -92,10 +92,10 @@ export default function NetworkMapLeaflet() {
           center={pool.coords}
           radius={pool.count === 0 ? 6 : Math.max(8, Math.min(18, pool.count * 2.5))}
           fillColor={getColor(pool.count)}
-          color={getColor(pool.count)}
-          fillOpacity={0.85}
+          color="#ffffff"
+          fillOpacity={0.9}
           weight={2}
-          opacity={1}
+          opacity={0.9}
         >
           <Tooltip direction="top" permanent={false}>
             <div style={{ fontSize: "11px", fontWeight: 600 }}>
@@ -109,11 +109,11 @@ export default function NetworkMapLeaflet() {
       {/* Border crossing marker */}
       <CircleMarker
         center={BORDER}
-        radius={7}
+        radius={8}
         fillColor="#a855f7"
-        color="#a855f7"
-        fillOpacity={0.9}
-        weight={2}
+        color="#ffffff"
+        fillOpacity={0.95}
+        weight={2.5}
         opacity={1}
       >
         <Tooltip direction="top" permanent={false}>

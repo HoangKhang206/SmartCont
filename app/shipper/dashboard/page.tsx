@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Plus, GitMerge, Map, Star, TrendingUp, Package, Truck, AlertTriangle } from "lucide-react"
+import { Plus, GitMerge, Map, Star, TrendingUp, Package, Container, AlertTriangle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -13,7 +13,7 @@ import { RslDonutChart } from "@/components/dashboard/RslDonutChart"
 import { ContainerNetworkMap } from "@/components/dashboard/ContainerNetworkMap"
 import { DisruptionSimulatorPanel } from "@/components/dashboard/DisruptionSimulatorPanel"
 import { LiveTrackingMini } from "@/components/dashboard/LiveTrackingMini"
-import { getCurrentUser, getBookings, getRatings, getShipments } from "@/lib/data-store"
+import { getCurrentUser, getBookings, getRatings, getShipments, getContainers } from "@/lib/data-store"
 import { formatNumber } from "@/lib/utils"
 import type { User, Booking } from "@/lib/types"
 
@@ -30,10 +30,10 @@ interface MetricCardProps {
 
 function MetricCard({ icon: Icon, label, value, sub, trend, trendUp, iconColor = "text-accent", iconBg = "bg-accent/10" }: MetricCardProps) {
   return (
-    <Card className="p-5 hover:border-border transition-colors">
+    <Card className="p-5 hover:shadow-sm transition-shadow">
       <div className="flex items-start justify-between mb-3">
-        <div className={`flex h-9 w-9 items-center justify-center rounded-lg ${iconBg}`}>
-          <Icon className={`h-4.5 w-4.5 ${iconColor}`} />
+        <div className={`flex h-10 w-10 items-center justify-center rounded-full ${iconBg}`}>
+          <Icon className={`h-5 w-5 ${iconColor}`} />
         </div>
         {trend && (
           <Badge
@@ -59,7 +59,7 @@ export default function ShipperDashboard() {
   const [user, setUser] = useState<User | null>(null)
   const [pendingRatings, setPendingRatings] = useState<Booking[]>([])
   const [metrics, setMetrics] = useState({
-    totalLots: 0, atRisk: 0, inTransit: 0, onTimeRate: "96%",
+    totalLots: 0, availableContainers: 0, atRisk: 0, onTimeRate: "96%",
   })
 
   useEffect(() => {
@@ -74,8 +74,10 @@ export default function ShipperDashboard() {
 
       const shipments = getShipments().filter((s) => s.shipperId === u.id)
       const atRisk = shipments.filter((s) => s.rsl < 24).length
-      const inTransit = shipments.filter((s) => s.status === "in_transit").length
-      setMetrics({ totalLots: shipments.length, atRisk, inTransit, onTimeRate: "96%" })
+      const available = getContainers().filter(
+        (c) => !["in_transit", "at_border", "cleared_border"].includes(c.currentPhase)
+      ).length
+      setMetrics({ totalLots: shipments.length, availableContainers: available, atRisk, onTimeRate: "96%" })
     }
   }, [])
 
@@ -110,7 +112,7 @@ export default function ShipperDashboard() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <MetricCard
             icon={Package}
-            label="Tổng LOT hàng"
+            label="Total LOTs"
             value={String(metrics.totalLots)}
             sub="lô hàng trong hệ thống"
             trend="+2 vs hôm qua"
@@ -119,24 +121,24 @@ export default function ShipperDashboard() {
             iconBg="bg-primary/10"
           />
           <MetricCard
+            icon={Container}
+            label="Available Reefer Containers"
+            value={String(metrics.availableContainers)}
+            sub="sẵn sàng booking ngay"
+            trend="+3 vs hôm qua"
+            trendUp
+            iconColor="text-cold"
+            iconBg="bg-cold/10"
+          />
+          <MetricCard
             icon={AlertTriangle}
             label="At Risk LOTs"
             value={String(metrics.atRisk)}
             sub="RSL < 24h — cần ưu tiên"
-            trend={metrics.atRisk > 0 ? `-1 vs hôm qua` : "Ổn định"}
+            trend={metrics.atRisk > 0 ? "-1 vs hôm qua" : "Ổn định"}
             trendUp
             iconColor="text-danger"
             iconBg="bg-danger/10"
-          />
-          <MetricCard
-            icon={Truck}
-            label="Đang vận chuyển"
-            value={String(metrics.inTransit)}
-            sub="lô đang trên đường"
-            trend="+1 vs hôm qua"
-            trendUp
-            iconColor="text-accent"
-            iconBg="bg-accent/10"
           />
           <MetricCard
             icon={TrendingUp}

@@ -29,10 +29,10 @@ interface MetricCardProps {
 
 function MetricCard({ icon: Icon, label, value, sub, trend, trendUp, iconColor = "text-accent", iconBg = "bg-accent/10" }: MetricCardProps) {
   return (
-    <Card className="p-5">
+    <Card className="p-5 hover:shadow-sm transition-shadow">
       <div className="flex items-start justify-between mb-3">
-        <div className={`flex h-9 w-9 items-center justify-center rounded-lg ${iconBg}`}>
-          <Icon className={`h-4.5 w-4.5 ${iconColor}`} />
+        <div className={`flex h-10 w-10 items-center justify-center rounded-full ${iconBg}`}>
+          <Icon className={`h-5 w-5 ${iconColor}`} />
         </div>
         {trend && (
           <Badge
