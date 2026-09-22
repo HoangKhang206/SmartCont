@@ -157,7 +157,7 @@ export default function NetworkMapLeaflet({ mode = "live" }: Props) {
 
       {/* ── Legend overlay — top-left ── */}
       {legendOpen && (
-        <div className="absolute top-3 left-3 z-[1000] bg-white rounded-xl shadow-lg p-3 min-w-[168px] select-none">
+        <div className="absolute top-3 left-3 z-[1000] bg-white rounded-xl shadow-lg p-3 min-w-[168px] select-none max-h-[calc(100%-24px)] overflow-y-auto">
           {/* Header */}
           <div className="flex items-center justify-between mb-2.5">
             <span className="text-[11px] font-semibold text-gray-800 leading-none">Container Network</span>
