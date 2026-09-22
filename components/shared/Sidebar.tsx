@@ -13,6 +13,7 @@ import {
   CalendarCheck,
   AlertTriangle,
   MessageSquare,
+  Shield,
   LogOut,
   ChevronRight,
 } from "lucide-react"
@@ -44,6 +45,10 @@ const carrierNav: NavItem[] = [
   { label: "Bookings",     href: "/carrier/bookings",   icon: CalendarCheck },
   { label: "Sự cố",        href: "/carrier/incidents",  icon: AlertTriangle },
   { label: "Đánh giá",     href: "/carrier/ratings",    icon: MessageSquare },
+]
+
+const legalNav: NavItem[] = [
+  { label: "Chính sách bảo mật", href: "/privacy", icon: Shield },
 ]
 
 function getInitials(name: string): string {
@@ -98,37 +103,45 @@ export function Sidebar({ role, user, className }: SidebarProps) {
           {role === "shipper" ? "Exporter Portal" : "Carrier Portal"}
         </p>
 
-        {navItems.map((item) => {
+        {[...navItems, ...legalNav].map((item, idx) => {
           const Icon = item.icon
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
+          const isFirstLegal = idx === navItems.length
 
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150"
-              style={{
-                background: isActive ? "hsl(var(--sidebar-active))" : "transparent",
-                color: isActive ? "hsl(var(--sidebar-fg))" : "hsl(var(--sidebar-muted))",
-                fontWeight: isActive ? 500 : 400,
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive) {
-                  e.currentTarget.style.background = "hsl(var(--sidebar-hover))"
-                  e.currentTarget.style.color = "hsl(var(--sidebar-fg))"
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive) {
-                  e.currentTarget.style.background = "transparent"
-                  e.currentTarget.style.color = "hsl(var(--sidebar-muted))"
-                }
-              }}
-            >
-              <Icon className="h-[17px] w-[17px] flex-shrink-0" />
-              <span className="flex-1 truncate">{item.label}</span>
-              {isActive && <ChevronRight className="h-3 w-3 flex-shrink-0 opacity-60" />}
-            </Link>
+            <div key={item.href}>
+              {isFirstLegal && (
+                <div
+                  className="my-2 mx-1"
+                  style={{ borderTop: "1px solid hsl(var(--sidebar-border))" }}
+                />
+              )}
+              <Link
+                href={item.href}
+                className="group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150"
+                style={{
+                  background: isActive ? "hsl(var(--sidebar-active))" : "transparent",
+                  color: isActive ? "hsl(var(--sidebar-fg))" : "hsl(var(--sidebar-muted))",
+                  fontWeight: isActive ? 500 : 400,
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = "hsl(var(--sidebar-hover))"
+                    e.currentTarget.style.color = "hsl(var(--sidebar-fg))"
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = "transparent"
+                    e.currentTarget.style.color = "hsl(var(--sidebar-muted))"
+                  }
+                }}
+              >
+                <Icon className="h-[17px] w-[17px] flex-shrink-0" />
+                <span className="flex-1 truncate">{item.label}</span>
+                {isActive && <ChevronRight className="h-3 w-3 flex-shrink-0 opacity-60" />}
+              </Link>
+            </div>
           )
         })}
 
