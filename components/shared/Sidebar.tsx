@@ -29,11 +29,6 @@ interface NavItem {
   icon: React.ElementType
 }
 
-interface ShortcutItem {
-  label: string
-  href: string
-}
-
 const shipperNav: NavItem[] = [
   { label: "Dashboard",         href: "/shipper/dashboard",     icon: LayoutDashboard },
   { label: "Live Map",          href: "/shipper/tracking",      icon: Map },
@@ -43,23 +38,12 @@ const shipperNav: NavItem[] = [
   { label: "Đánh giá",          href: "/shipper/ratings",       icon: Star },
 ]
 
-const shipperShortcuts: ShortcutItem[] = [
-  { label: "Add New LOT",         href: "/shipper/shipments" },
-  { label: "Run Optimization",    href: "/shipper/consolidation" },
-  { label: "Simulate Disruption", href: "/shipper/dashboard" },
-]
-
 const carrierNav: NavItem[] = [
   { label: "Dashboard",    href: "/carrier/dashboard",  icon: LayoutDashboard },
   { label: "Fleet & Cont", href: "/carrier/containers", icon: Truck },
   { label: "Bookings",     href: "/carrier/bookings",   icon: CalendarCheck },
   { label: "Sự cố",        href: "/carrier/incidents",  icon: AlertTriangle },
   { label: "Đánh giá",     href: "/carrier/ratings",    icon: MessageSquare },
-]
-
-const carrierShortcuts: ShortcutItem[] = [
-  { label: "Add Container",   href: "/carrier/containers" },
-  { label: "Report Incident", href: "/carrier/incidents" },
 ]
 
 function getInitials(name: string): string {
@@ -76,7 +60,6 @@ export function Sidebar({ role, user, className }: SidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
   const navItems = role === "shipper" ? shipperNav : carrierNav
-  const shortcuts = role === "shipper" ? shipperShortcuts : carrierShortcuts
 
   function handleLogout() {
     logout()
@@ -149,42 +132,6 @@ export function Sidebar({ role, user, className }: SidebarProps) {
           )
         })}
 
-        {/* Shortcuts */}
-        <div className="pt-3 mt-2" style={{ borderTop: "1px solid hsl(var(--sidebar-border))" }}>
-          <p
-            className="px-3 mb-2 text-[9px] font-semibold uppercase tracking-widest"
-            style={{ color: "hsl(var(--sidebar-muted))" }}
-          >
-            Shortcuts
-          </p>
-          {shortcuts.map((s) => (
-            <Link
-              key={s.label}
-              href={s.href}
-              className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs transition-all duration-150"
-              style={{ color: "hsl(var(--sidebar-muted))" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "hsl(var(--sidebar-hover))"
-                e.currentTarget.style.color = "hsl(var(--sidebar-fg))"
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent"
-                e.currentTarget.style.color = "hsl(var(--sidebar-muted))"
-              }}
-            >
-              <span
-                className="flex items-center justify-center h-4 w-4 rounded text-[10px] font-bold flex-shrink-0"
-                style={{
-                  background: "hsl(var(--sidebar-active))",
-                  color: "hsl(152 70% 65%)",
-                }}
-              >
-                +
-              </span>
-              <span className="truncate">{s.label}</span>
-            </Link>
-          ))}
-        </div>
       </nav>
 
       {/* User section */}
