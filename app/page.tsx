@@ -81,8 +81,8 @@ export default function LandingPage() {
     <div className="min-h-screen bg-background">
       {/* Navbar */}
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Logo size="md" />
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <Logo size="lg" />
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="sm" asChild>
               <Link href="/select-role">Đăng nhập</Link>

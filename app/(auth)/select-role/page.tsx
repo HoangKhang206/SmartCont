@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { Warehouse, Truck, ArrowRight, Snowflake, CheckCircle2 } from "lucide-react"
+import { Warehouse, Truck, ArrowRight, CheckCircle2 } from "lucide-react"
 import { Logo } from "@/components/shared/Logo"
 import { cn } from "@/lib/utils"
 import type { UserRole } from "@/lib/types"
@@ -21,7 +21,7 @@ const roles: {
     icon: Warehouse,
     title: "Doanh nghiệp",
     subtitle: "Exporter — Xuất khẩu nông sản",
-    description: "Vựa sầu riêng, xoài, thanh long quy mô 3–15 tấn/lô. Tìm cont, ghép cont, theo dõi hàng đến cửa khẩu.",
+    description: "Doanh nghiệp nông sản (sầu riêng, xoài, thanh long) quy mô 3–15 tấn/lô. Tìm cont, ghép cont, theo dõi hàng đến cửa khẩu.",
     points: [
       "Tạo lô hàng + tự tính RSL",
       "Book cont nguyên hoặc ghép cont",
@@ -58,8 +58,8 @@ export default function SelectRolePage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="border-b border-border px-6 h-14 flex items-center">
-        <Logo size="md" href="/" />
+      <header className="border-b border-border px-6 h-16 flex items-center">
+        <Logo size="lg" href="/" />
       </header>
 
       {/* Content */}
@@ -67,8 +67,8 @@ export default function SelectRolePage() {
         <div className="w-full max-w-2xl">
           {/* Title */}
           <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-accent/10 mb-4">
-              <Snowflake className="h-6 w-6 text-accent" />
+            <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-accent/10 mb-4">
+              <img src="/logo.png" alt="SmartDurian" className="h-10 w-10 object-contain" />
             </div>
             <h1 className="text-2xl font-semibold tracking-tight mb-2">Bạn là ai?</h1>
             <p className="text-sm text-muted-foreground">Chọn vai trò để vào đúng interface.</p>
