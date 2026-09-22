@@ -27,26 +27,30 @@ interface MetricCardProps {
 
 function MetricCard({ icon: Icon, label, value, trend, trendUp, iconColor = "text-accent", iconBg = "bg-accent/10" }: MetricCardProps) {
   return (
-    <Card className="p-4 hover:shadow-sm transition-shadow">
-      <div className="flex items-start justify-between mb-2">
-        <div className={`flex h-10 w-10 items-center justify-center rounded-full flex-shrink-0 ${iconBg}`}>
-          <Icon className={`h-5 w-5 ${iconColor}`} />
+    <Card className="px-4 py-3 hover:shadow-sm transition-shadow">
+      <div className="flex items-center gap-3">
+        <div className={`flex h-9 w-9 items-center justify-center rounded-full flex-shrink-0 ${iconBg}`}>
+          <Icon className={`h-[18px] w-[18px] ${iconColor}`} />
         </div>
-        {trend && (
-          <Badge
-            variant="outline"
-            className={`text-[9px] h-4 px-1.5 font-medium ${
-              trendUp
-                ? "border-success/30 text-success bg-success/8"
-                : "border-warning/30 text-warning bg-warning/8"
-            }`}
-          >
-            {trend}
-          </Badge>
-        )}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-baseline justify-between gap-1">
+            <p className="text-2xl font-semibold tabular-nums leading-none">{value}</p>
+            {trend && (
+              <Badge
+                variant="outline"
+                className={`text-[9px] h-4 px-1.5 font-medium flex-shrink-0 ${
+                  trendUp
+                    ? "border-success/30 text-success bg-success/8"
+                    : "border-warning/30 text-warning bg-warning/8"
+                }`}
+              >
+                {trend}
+              </Badge>
+            )}
+          </div>
+          <p className="text-[11px] text-muted-foreground mt-1 leading-tight">{label}</p>
+        </div>
       </div>
-      <p className="text-2xl font-semibold tabular-nums tracking-tight">{value}</p>
-      <p className="text-xs text-muted-foreground mt-1 leading-tight">{label}</p>
     </Card>
   )
 }
@@ -238,8 +242,8 @@ export default function CarrierDashboardPage() {
           </Card>
         </div>
 
-        {/* Row 4 — Bottom 3 cards, fixed height */}
-        <div className="flex-shrink-0 h-56 grid grid-cols-3 gap-3">
+        {/* Row 4 — Bottom 3 cards, expanded */}
+        <div className="flex-shrink-0 h-64 grid grid-cols-3 gap-3">
 
           {/* Rating Breakdown */}
           <Card className="p-3 overflow-hidden flex flex-col">
@@ -249,7 +253,7 @@ export default function CarrierDashboardPage() {
                 <Link href="/carrier/ratings">Chi tiết</Link>
               </Button>
             </div>
-            <div className="flex-1 min-h-0 overflow-hidden">
+            <div className="flex-1 min-h-0 overflow-y-auto">
               <RatingBreakdown user={user} />
             </div>
           </Card>
@@ -268,7 +272,7 @@ export default function CarrierDashboardPage() {
                 <Link href="/carrier/containers/new" className="text-accent underline">Publish ngay</Link>
               </p>
             ) : (
-              <div className="divide-y divide-border/40 overflow-hidden">
+              <div className="divide-y divide-border/40 overflow-y-auto flex-1 min-h-0">
                 {containers.slice(0, 3).map((c) => (
                   <Link
                     key={c.id}

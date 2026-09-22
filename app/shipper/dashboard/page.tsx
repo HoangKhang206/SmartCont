@@ -27,26 +27,30 @@ interface MetricCardProps {
 
 function MetricCard({ icon: Icon, label, value, trend, trendUp, iconColor = "text-accent", iconBg = "bg-accent/10" }: MetricCardProps) {
   return (
-    <Card className="p-4 hover:shadow-sm transition-shadow">
-      <div className="flex items-start justify-between mb-2">
-        <div className={`flex h-10 w-10 items-center justify-center rounded-full flex-shrink-0 ${iconBg}`}>
-          <Icon className={`h-5 w-5 ${iconColor}`} />
+    <Card className="px-4 py-3 hover:shadow-sm transition-shadow">
+      <div className="flex items-center gap-3">
+        <div className={`flex h-9 w-9 items-center justify-center rounded-full flex-shrink-0 ${iconBg}`}>
+          <Icon className={`h-[18px] w-[18px] ${iconColor}`} />
         </div>
-        {trend && (
-          <Badge
-            variant="outline"
-            className={`text-[9px] h-4 px-1.5 font-medium ${
-              trendUp
-                ? "border-success/30 text-success bg-success/8"
-                : "border-danger/30 text-danger bg-danger/8"
-            }`}
-          >
-            {trend}
-          </Badge>
-        )}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-baseline justify-between gap-1">
+            <p className="text-2xl font-semibold tabular-nums leading-none">{value}</p>
+            {trend && (
+              <Badge
+                variant="outline"
+                className={`text-[9px] h-4 px-1.5 font-medium flex-shrink-0 ${
+                  trendUp
+                    ? "border-success/30 text-success bg-success/8"
+                    : "border-danger/30 text-danger bg-danger/8"
+                }`}
+              >
+                {trend}
+              </Badge>
+            )}
+          </div>
+          <p className="text-[11px] text-muted-foreground mt-1 leading-tight">{label}</p>
+        </div>
       </div>
-      <p className="text-2xl font-semibold tabular-nums tracking-tight">{value}</p>
-      <p className="text-xs text-muted-foreground mt-1 leading-tight">{label}</p>
     </Card>
   )
 }
@@ -171,8 +175,8 @@ export default function ShipperDashboard() {
           </Card>
         </div>
 
-        {/* Row 4 — Bottom 3 cards, fixed height */}
-        <div className="flex-shrink-0 h-56 grid grid-cols-3 gap-3">
+        {/* Row 4 — Bottom 3 cards, expanded fixed height */}
+        <div className="flex-shrink-0 h-64 grid grid-cols-3 gap-3">
 
           {/* RSL Overview */}
           <Card className="p-3 overflow-hidden flex flex-col">
@@ -182,7 +186,7 @@ export default function ShipperDashboard() {
                 <Link href="/shipper/shipments">View all</Link>
               </Button>
             </div>
-            <div className="flex-1 min-h-0 overflow-hidden">
+            <div className="flex-1 min-h-0 overflow-y-auto">
               {user && <RslDonutChart user={user} compact />}
             </div>
           </Card>
@@ -195,7 +199,7 @@ export default function ShipperDashboard() {
                 <Link href="/shipper/shipments">Tất cả</Link>
               </Button>
             </div>
-            <div className="flex-1 min-h-0 overflow-hidden">
+            <div className="flex-1 min-h-0 overflow-y-auto">
               {user && <UpcomingShipmentsTable user={user} />}
             </div>
           </Card>
@@ -220,7 +224,7 @@ export default function ShipperDashboard() {
                   <Link href="/shipper/tracking">Bản đồ</Link>
                 </Button>
               </div>
-              <div className="flex-1 min-h-0 overflow-hidden">
+              <div className="flex-1 min-h-0 overflow-y-auto">
                 {user && <LiveTrackingMini user={user} />}
               </div>
             </Card>

@@ -93,8 +93,8 @@ export function RslDonutChart({ user, compact = false }: RslDonutChartProps) {
         ))}
       </div>
 
-      {/* Worst RSL list — hidden in compact mode */}
-      {!compact && worstLots.length > 0 && (
+      {/* Worst RSL list */}
+      {worstLots.length > 0 && (
         <div className="space-y-1.5">
           <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide">Worst RSL</p>
           {worstLots.map((s) => {

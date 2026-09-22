@@ -40,7 +40,7 @@ export function LiveTrackingMini({ user }: LiveTrackingMiniProps) {
     (b) => b.shipperId === user.id && (b.status === "in_progress" || b.status === "confirmed")
   )
 
-  const items = bookings.slice(0, 3).map((b) => {
+  const items = bookings.slice(0, 6).map((b) => {
     const container = getContainerById(b.containerId)
     const shipments = getShipments().filter((s) => b.shipmentIds.includes(s.id))
     return { booking: b, container, shipments }
@@ -113,12 +113,12 @@ export function LiveTrackingMini({ user }: LiveTrackingMiniProps) {
         )
       })}
 
-      {bookings.length > 3 && (
+      {bookings.length > 6 && (
         <Link
           href="/shipper/tracking"
           className="block text-center text-[10px] text-accent hover:underline pt-1"
         >
-          +{bookings.length - 3} cont khác — View all →
+          +{bookings.length - 6} cont khác — View all →
         </Link>
       )}
     </div>
