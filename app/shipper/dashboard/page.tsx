@@ -84,8 +84,7 @@ export default function ShipperDashboard() {
 
   return (
     <DashboardShell requiredRole="shipper" noScroll>
-      {/* 1-viewport-fit: flex column fills exactly h-full, no scroll */}
-      <div className="h-full overflow-hidden flex flex-col gap-3">
+      <div className="flex flex-col gap-3 md:h-full md:overflow-hidden">
 
         {/* Row 1 — Header */}
         <div className="flex-shrink-0 flex items-center justify-between">
@@ -111,8 +110,8 @@ export default function ShipperDashboard() {
           </div>
         </div>
 
-        {/* Row 2 — 4 metric cards */}
-        <div className="flex-shrink-0 grid grid-cols-4 gap-3">
+        {/* Row 2 — metric cards */}
+        <div className="flex-shrink-0 grid grid-cols-2 md:grid-cols-4 gap-3">
           <MetricCard
             icon={Package}
             label="Total LOTs"
@@ -151,10 +150,10 @@ export default function ShipperDashboard() {
           />
         </div>
 
-        {/* Row 3 — Map (2/3) + Disruption Simulator (1/3), fills remaining height */}
-        <div className="flex-1 min-h-0 grid grid-cols-3 gap-3">
+        {/* Row 3 — Map + Disruption Simulator */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:flex-1 md:min-h-0">
           {/* Container Network Map */}
-          <Card className="col-span-2 p-3 flex flex-col min-h-0">
+          <Card className="col-span-1 md:col-span-2 p-3 flex flex-col min-h-0 h-72 md:h-auto">
             <div className="flex items-center justify-between mb-2 flex-shrink-0">
               <div className="flex items-center gap-2">
                 <Map className="h-4 w-4 text-accent" />
@@ -182,16 +181,16 @@ export default function ShipperDashboard() {
           </Card>
 
           {/* Disruption Simulator */}
-          <Card className="p-3 min-h-0 overflow-hidden flex flex-col">
+          <Card className="p-3 min-h-0 overflow-hidden flex flex-col h-72 md:h-auto">
             <DisruptionSimulatorPanel />
           </Card>
         </div>
 
-        {/* Row 4 — Bottom 3 cards, expanded fixed height */}
-        <div className="flex-shrink-0 h-64 grid grid-cols-3 gap-3">
+        {/* Row 4 — Bottom 3 cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:flex-shrink-0 md:h-64">
 
           {/* RSL Overview */}
-          <Card className="p-3 overflow-hidden flex flex-col">
+          <Card className="p-3 overflow-hidden flex flex-col min-h-52 md:min-h-0">
             <div className="flex items-center justify-between mb-2 flex-shrink-0">
               <p className="font-medium text-sm">RSL Overview</p>
               <Button variant="ghost" size="sm" className="h-6 text-xs px-2" asChild>
@@ -204,7 +203,7 @@ export default function ShipperDashboard() {
           </Card>
 
           {/* LOT đang hoạt động */}
-          <Card className="p-3 overflow-hidden flex flex-col">
+          <Card className="p-3 overflow-hidden flex flex-col min-h-52 md:min-h-0">
             <div className="flex items-center justify-between mb-2 flex-shrink-0">
               <p className="font-medium text-sm">LOT đang hoạt động</p>
               <Button variant="ghost" size="sm" className="h-6 text-xs px-2" asChild>
@@ -229,7 +228,7 @@ export default function ShipperDashboard() {
                 </Button>
               </Card>
             )}
-            <Card className="p-3 overflow-hidden flex flex-col flex-1 min-h-0">
+            <Card className="p-3 overflow-hidden flex flex-col flex-1 min-h-0 min-h-52 md:min-h-0">
               <div className="flex items-center justify-between mb-2 flex-shrink-0">
                 <p className="font-medium text-sm">Live Tracking</p>
                 <Button variant="ghost" size="sm" className="h-6 text-xs px-2" asChild>

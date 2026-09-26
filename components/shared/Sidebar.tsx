@@ -73,7 +73,7 @@ export function Sidebar({ role, user, className }: SidebarProps) {
 
   return (
     <aside
-      className={cn("w-60 flex-shrink-0 flex flex-col h-screen sticky top-0 z-30", className)}
+      className={cn("w-60 flex-shrink-0 hidden md:flex flex-col h-screen sticky top-0 z-30", className)}
       style={{
         background: "hsl(var(--sidebar-bg))",
         borderRight: "1px solid hsl(var(--sidebar-border))",
