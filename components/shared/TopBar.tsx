@@ -16,6 +16,7 @@ import {
 import { RoleSwitcher } from "@/components/shared/RoleSwitcher"
 import { NotificationBell } from "@/components/shared/NotificationBell"
 import { ProfileEditDialog } from "@/components/shared/ProfileEditDialog"
+import { Logo } from "@/components/shared/Logo"
 import { logout, setCurrentUser } from "@/lib/data-store"
 import { format } from "date-fns"
 import { vi } from "date-fns/locale"
@@ -67,8 +68,11 @@ export function TopBar({ user: initialUser }: TopBarProps) {
 
   return (
     <header className="sticky top-0 z-20 flex h-14 items-center border-b border-border bg-card px-5 gap-4 flex-shrink-0 shadow-sm">
+      {/* Logo — mobile only (sidebar hidden on mobile) */}
+      <Logo size="sm" href={`/${user.role}/dashboard`} className="md:hidden flex-shrink-0" />
+
       {/* Search */}
-      <div className="relative flex-1 max-w-md">
+      <div className="relative flex-1 max-w-md hidden sm:block">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground/50" />
         <input
           type="text"
